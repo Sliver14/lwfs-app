@@ -1,23 +1,46 @@
+.navbar-page{
+    display: flex;
+    flex-direction: column;
+    
+}
+
 .navbar {
     display: flex;
-    flex: column;
+    position: fixed;
+    flex-direction: column;
+    width: 100vw;
+    
+}
+
+.feedback {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+    
+    padding: 0.4rem;;
+    background-color: rgb(7, 6, 66);
+    color: #fff;
+    height: 4em;
 }
 .header-container {
     display: flex;
-    position: fixed;
     align-items: center;
-    background-color: rgb(0, 0, 0);
-    padding: 1rem;
-    width: 100vw;
+    padding: 0.1rem;
+    background-color: #fff;
+}
+
+.logo {
+    width: 200px;
+    margin-right: 0.8em;
 }
 
 .sidebar {
     position: fixed;
-    top: 10%;
     right: 0;
-    width:30%;
-    background-color: rgb(66, 61, 61);
-    color: white;
+    width:100%;
+    background-color: #fff;
+    height: 100vh;
     padding: 0.7em;
     overflow:hidden;
     transition: 0.3s ease;
@@ -37,19 +60,25 @@
 .toggle-btn {
     position: absolute;
     /* top: 1.2em; */
-    right: 5em;
+    right: 2em;
     cursor: pointer;
 }
-.profile-picture-container{
-    width: 2em;
-    height: 2em;
-    border-radius: 50%;
-    background-color: black;
-    margin-right: 1em;
+.header-container2 {
+    margin-left: 2em;
+    margin-top: 0.4em;
 }
-.user-name{
-    margin-right: 1em;
-    color:#fff;
+
+.links {
+    font-weight: bold ;
+    
+}
+.links li{
+    border-bottom: 1px solid rgba(233, 227, 227, 0.726);
+    padding-bottom: 0.5em;
+}
+.links a {
+    color: black;
+    text-decoration: none;
 }
 
 /* Modals */

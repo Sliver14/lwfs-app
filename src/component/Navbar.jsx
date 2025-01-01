@@ -1,83 +1,64 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import "../style/Navbar.css";
-import { useState } from 'react';
-import Modal from "../component/Modal";
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
-import MenuIcon from '@mui/icons-material/Menu';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import logo from "../images/lwfs_logo.png";
 
 function Navbar() {
-        const [isModalOpen, setIsModalOpen] = useState(false);
-     const [isLogIn, setIsLogIn] = useState(true);
-     const [isRegister, setIRegister] = useState(false);
-     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false);
    
-     const toggleSidebar = () => {
-       setIsOpen(!isOpen);
-     }
-   
-     const openModal = () => setIsModalOpen(true);
-     const closeModal = () => setIsModalOpen(false);
+    const toggleSidebar = () => {
+      setIsOpen(!isOpen);
+    }
+
   return (
-    <div className='navbar'>
-      
-    <div className='header-container'>
-      
-      <div className='profile-picture-container'>
-      </div><span className='user-name'>User</span>
+    <div className='navbar-page'>
 
-      <button onClick={openModal}>Login / Register</button>
+    <div className='navbar' >
+      <div className='feedback' >
+        <h5>feedback@lwfoundation.org</h5>
+        <h5>+44 099 647 7484</h5>
+      </div>
+    
+      <div className='header-container'>
+        <img onClick={() => {navigate("/")}} className='logo' src={logo} alt="lwfs_logo"/>
+        
 
-      {/* Toggle */}
-      <button className="toggle-btn" onClick={toggleSidebar}>
-        {isOpen ? <MenuOpenIcon/> : <MenuIcon/>}
-      </button>
+        {/* Toggle */}
+        <button className="toggle-btn" onClick={toggleSidebar}>
+          {isOpen ? <MenuOpenIcon/> : <MenuOutlinedIcon/>}
+        </button>
+      </div>
     </div>
 
     {/* Sidebar */}
     <div className={`sidebar ${isOpen ? "open" : "close"}`}>
-      <ul>
-      <Link to="/live-tv">LiveTv</Link>
+    <div className='header-container2'>
+        <img onClick={() => {navigate("/")}} className='logo' src={logo} alt="lwfs_logo"/>
+        
+
+        {/* Toggle */}
+        <button className="toggle-btn" onClick={toggleSidebar}>
+          {isOpen ? <MenuOpenIcon/> : <MenuOutlinedIcon/>}
+        </button>
+      </div>
+      <ul className='links' >
+      <li onClick={toggleSidebar}>
+        <Link to="/">HOME</Link>
+      </li>
+      <li onClick={toggleSidebar}>
+        <Link to="/live-tv">LIVE-TV</Link>
+      </li>
         <li>LWFS Store</li>
         <li>Online foundation School/Exams</li>
         <li>Testimony Bank</li>
       </ul>
     </div>
   
-  {/* Modal */}
-  {isModalOpen && (
-    <div className="modal">
-      <div className="modal-content">
-        <button className="close-btn" onClick={closeModal}>X</button>
-
-        {isLogIn && <>
-          <h2>Sign In</h2>
-          {/* Add your Login/Register forms here */}
-          <form action="">
-          <input type="text" placeholder='Email'/>
-          <input type="password" placeholder='Password'/>
-          <button >Sign In</button>
-          </form>
-          <span onClick={()=>{setIsLogIn(false),setIRegister(true)}}>Create Account</span>
-        </>  
-        }
-
-        {/* Create Account */}
-        {isRegister && <>
-          <h2>Create Account</h2>
-          <form action="">
-          <input type="text" placeholder='Email'/>
-          <input type="password" placeholder='Password'/>
-          <button >Create Account</button>
-          </form>
-          <span onClick={()=>{setIsLogIn(true),setIRegister(false)}}>Sign In</span>
-        </>  
-        }
-
-        
-      </div>
-    </div>
-  )}
 </div>
 
 
