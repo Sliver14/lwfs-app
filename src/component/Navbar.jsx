@@ -46,6 +46,7 @@ function Navbar() {
           {isOpen ? <MenuOpenIcon/> : <MenuOutlinedIcon/>}
         </button>
       </div>
+      <div className='sidebar-links' >
       <ul className='links' >
       <li onClick={toggleSidebar}>
         <Link to="/">HOME</Link>
@@ -57,6 +58,8 @@ function Navbar() {
         <li>Online foundation School/Exams</li>
         <li>Testimony Bank</li>
       </ul>
+      </div>
+      
     </div>
   
 </div>
