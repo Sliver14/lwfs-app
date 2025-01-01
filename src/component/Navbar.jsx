@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-import logo from "../images/lwfs_logo.png";
+import logo from "../images/LWFS_LOGO.png";
 
 function Navbar() {
     const navigate = useNavigate();
