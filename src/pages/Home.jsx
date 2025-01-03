@@ -2,15 +2,14 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoCloseSharp } from "react-icons/io5";
-// import "../style/Modal.css";
-import SlickImageSlider from "../component/SlickImageSlider";
+import ImageSlider from "../component/ImageSlider";
 
 function Home() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogIn, setIsLogIn] = useState(true);
   const [isRegister, setIRegister] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   useEffect(() => {
     if(!loggedIn){
@@ -20,8 +19,15 @@ function Home() {
 
   // const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+  const images = [
+    "https://photos.fife.usercontent.google.com/pw/AP1GczMgR4azRi9-mI5jaiy6i2ZQRWebJhWIp6ovAGUoDtF5nuTOGypFFNYvZw=w500-h375-s-no-gm?authuser=0",
+  "https://photos.google.com/photo/AF1QipMFonZ9HoJPQcLjK6FGToYVO18qJl84xH3MPdO8",
+  "https://photos.google.com/photo/AF1QipPr6oWLRl46wx4UP3cy4c6jofQp_R2Y0ML3nXj-",
+  ];
+
   return (
-    <div className=' mt-28'>
+    <div className='flex flex-col w-screen mt-10'>
        
        {/* Modal */}
       {isModalOpen && (
@@ -83,9 +89,14 @@ function Home() {
         </div>
       )}
 
-        <div className='flex'>
-            {/* <SlickImageSlider/> */}
+      <div className=" relative min-h-screen flex flex-col items-center justify-center bg-gray-100">
+        <div>
+          <h1 className='text-2xl font-semibold'>Up-Coming Programmes</h1>
         </div>
+          <div className="w-full max-w-4xl">
+              <ImageSlider images={images} autoSlide={true} interval={8000} />
+          </div>
+      </div>
      
     </div>
     
