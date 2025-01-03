@@ -27,7 +27,7 @@ function Home() {
   ];
 
   return (
-    <div className='flex flex-col w-screen mt-10'>
+    <div className='flex flex-col w-screen'>
        
        {/* Modal */}
       {isModalOpen && (
@@ -89,7 +89,7 @@ function Home() {
         </div>
       )}
 
-      <div className=" relative min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <div className=" relative min-h-screen flex flex-col items-center justify-center bg-gray-100 mt-10">
         <div>
           <h1 className='text-2xl font-semibold'>Up-Coming Programmes</h1>
         </div>
