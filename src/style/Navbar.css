@@ -19,7 +19,7 @@
     align-items: center; */
     
     padding: 0.4rem;;
-    background-color: rgb(7, 6, 66);
+    background-color: #011638;
     color: #fff;
     height: 4em;
 }
@@ -95,45 +95,42 @@
     
 }
 
-/* Modals */
-/* ------------------------------ */
 
-.modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-Index: 1000;
-        transition: 1s ease;
-    }
-.modal-content {
-    position: relative;
-    justify-items: center;
-    background-Color: white;
-    padding: 20px;
-    border-Radius: 5px;
-    width: 80%;
-    box-Shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: 1s ease;
-}
-.close-btn{
-    position: absolute;
-    top: 0.3em;
-    right: 1.2em;
-    background: transparent;
+/* Toggle Button */
+.toggle-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    background: none;
     border: none;
-    font-Size: 20px;
     cursor: pointer;
+    padding: 0;
+    margin: 0;
 }
 
-.modal-content form {
-    /* display: flex; */
-    /* flex: column; */
-    /* justify-content: center; */
-
+.toggle-btn .bar {
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 2px;
+    transition: all 0.3s ease-in-out;
 }
+
+/* Animation for the open state */
+.toggle-btn.open .bar:nth-child(1) {
+    transform: rotate(45deg) translateY(8px);
+    background-color: #ffcc00; /* Highlight color for the "X" state */
+}
+
+.toggle-btn.open .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.toggle-btn.open .bar:nth-child(3) {
+    transform: rotate(-45deg) translateY(-8px);
+    background-color: #ffcc00; /* Highlight color for the "X" state */
+}
+
+

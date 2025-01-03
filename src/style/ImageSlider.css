@@ -1,0 +1,33 @@
+/* Slider Container */
+.slider-container {
+    width: 80%;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Slide Image */
+.slide img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+}
+
+/* Dots Customization */
+.slick-dots li button:before {
+    font-size: 12px;
+    color: #004aad;
+}
+
+.slick-dots li.slick-active button:before {
+    color: #ffcc00;
+}
+
+/* Arrow Customization */
+.slick-prev, .slick-next {
+    color: #004aad;
+    font-size: 20px;
+    z-index: 1000;
+}
