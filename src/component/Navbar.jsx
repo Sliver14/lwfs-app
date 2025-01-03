@@ -22,7 +22,7 @@ function Navbar() {
 
     <div className='flex flex-col w-screen bg-white fixed' >
       
-      <div className='flex flex-col bg-blue-950 text-white p-3' >
+      <div className='flex flex-col bg-lwfs1 text-white p-3' >
         <h5>feedback@lwfoundation.org</h5>
         <h5>+44 099 647 7484</h5>
       </div>
@@ -39,7 +39,7 @@ function Navbar() {
     </div>
 
     {/* Opened Sidebar */}
-    <div className={`fixed justify-center w-screen h-full bg-white right-0 overflow-hidden transition ease-in-out duration-300 translate-x-full ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
+    <div className={`fixed justify-center w-screen h-full bg-white right-0 overflow-hidden transition ease-in-out duration-300 translate-x-full z-10 ${isOpen ? "-translate-x-0" : "translate-x-full"}`}>
 
       {/* LWFS logo */}
       <div className='flex flex-row justify-between pt-1 w-full'>

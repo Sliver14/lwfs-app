@@ -10,7 +10,7 @@ function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogIn, setIsLogIn] = useState(true);
   const [isRegister, setIRegister] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(flase);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     if(!loggedIn){
@@ -33,7 +33,7 @@ function Home() {
             
             {isLogIn && <>
                 <div className='flex justify-center w-full items-center mb-10 transition duration-300' >
-                  <h2 className='text-4xl font-bold  ' >Sign In</h2>
+                  <h2 className='text-4xl font-bold ' >Sign In</h2>
                   <button onClick={closeModal}>  
                     <IoCloseSharp className='absolute font-bold text-2xl top-5 right-5' />
                   </button>
