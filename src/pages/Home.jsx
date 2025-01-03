@@ -10,13 +10,13 @@ function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLogIn, setIsLogIn] = useState(true);
   const [isRegister, setIRegister] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
 
   useEffect(() => {
     if(!loggedIn){
       setIsModalOpen(true);
     }
-  }, []);
+  }, [loggedIn]);
 
   // const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);

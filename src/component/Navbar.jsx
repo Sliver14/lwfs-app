@@ -38,7 +38,7 @@ function Navbar() {
     </div>
 
     {/* Opened Sidebar */}
-    <div className={`fixed justify-center w-screen h-full bg-white right-0 overflow-hidden transition ease-in-out duration-300 translate-x-full z-20 ${isOpen ? "translate-x-1" : "translate-x-full"}`}>
+    <div className={`fixed  top-0 right-0 justify-center w-screen h-full bg-white  overflow-hidden transition ease-in-out duration-300 z-20 ${isOpen ? "translate-x-0" : "translate-x-full"}`}>
 
       {/* LWFS logo */}
       <div className='flex flex-row justify-between pt-1 w-full'>
