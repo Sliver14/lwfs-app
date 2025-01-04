@@ -23,16 +23,16 @@ function Home() {
   const closeModal = () => setIsModalOpen(false);
 
   const slides = [
-    {url: "http://localhost:5173/Jan-comm.jpg", title: "Jan-comm"},
+    {url: "https://drive.google.com/file/d/19PWPsa_May-KOc8IU7kKcWabUhKu2tci/view?usp=drive_link", title: "Jan-comm"},
   ];
 
   const videoSlides = [
-    { url: "http://localhost:5173/Are You With Me On This Rowd Month Promo Hd1.mp4", title: "video1" },
+    { url: "https://drive.google.com/file/d/1QUm1B2U71pLwgZ6wyWwVVsuXmkdXZBmV/view?usp=drive_link", title: "video1" },
     
   ];
 
   return (
-    <div className='flex flex-col w-screen bg-gray-100'>
+    <div className='flex flex-col pt-10 w-screen bg-gray-100'>
        
        {/* Modal */}
       {isModalOpen && (
@@ -104,7 +104,7 @@ function Home() {
 
       {/* Resource center video slider */}
       <div className="flex flex-col justify-center items-center bg-gray-100">
-        <h1>Directors message</h1>
+        <h1 className='font-bold py-5' >Directors message</h1>
         <div className="w-[95%] h-[50%] shadow-lg">
           {/* Auto-scroll enabled with 5-second interval */}
           <VideoSlider slides={videoSlides} autoScroll={true} interval={15000} />
