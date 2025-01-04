@@ -27,6 +27,8 @@ function Navbar() {
       <div className='flex gap-2'><MdOutlineEmail /><h5 className='text-xs'>feedback@lwfoundation.org</h5></div>
 
       <div className='flex gap-2'><FaPhoneSquare /><h5 className='text-xs'>+44 099 647 7484</h5></div>
+
+      <div><a href='https://kingschat.online/user/lwfsch'>Follow Us</a><img src='./images/kingschat.png' alt='image'/></div>
       </div>
     
       <div className='flex flex-row justify-between pt-1 w-screen'>
