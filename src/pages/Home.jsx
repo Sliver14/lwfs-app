@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { IoCloseSharp } from "react-icons/io5";
 import  ImageSlider from "./ImageSlider";
+import VideoSlider from "./VideoSlider";
 
 
 function Home() {
@@ -23,6 +24,11 @@ function Home() {
 
   const slides = [
     {url: "http://localhost:5173/Jan-comm.jpg", title: "Jan-comm"},
+  ];
+
+  const videoSlides = [
+    { url: "http://localhost:5173/Are You With Me On This Rowd Month Promo Hd1.mp4", title: "video1" },
+    
   ];
 
   return (
@@ -89,18 +95,22 @@ function Home() {
       )}
 
       {/* Up coming programmes */}
-      <div className="flex flex-col top-0  justify-center items-center h-screen bg-gray-100">
+      <div className="flex flex-col justify-center items-center h-[300px] bg-gray-100">
         <h1 className='font-bold py-5' >Up Coming Programmes</h1>
         <div className="w-[90%] h-[20%] shadow-lg">
           <ImageSlider slides={slides} autoScroll={true} interval={15000} />
         </div>
       </div>
 
-      {/* Resource center slider */}
-      <div className='flex flex-col h-72 border-4 border-solid border-slate-900 justify-center items-center w-screen' >
-        <h1>Directors Message</h1>
-        <button>View more</button>
-      </div>
+      {/* Resource center video slider */}
+      <div className="flex flex-col justify-center items-center bg-gray-100">
+        <h1>Directors message</h1>
+        <div className="w-[95%] h-[50%] shadow-lg">
+          {/* Auto-scroll enabled with 5-second interval */}
+          <VideoSlider slides={videoSlides} autoScroll={true} interval={15000} />
+        </div>
+        <button className='bg-lwfs2 text-white px-5 py-2 mt-2 font-bold rounded-md'>View more</button>
+    </div>
 
       {/* Testimony slider*/}
       <div className='flex flex-col justify-center items-center' >

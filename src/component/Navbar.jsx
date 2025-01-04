@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { GrMenu } from "react-icons/gr";
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { MdOutlineEmail } from "react-icons/md";
+import { FaPhoneSquare } from "react-icons/fa";
 
 import logo from "../images/LWFS_LOGO.png";
 
@@ -22,8 +24,9 @@ function Navbar() {
     <div className='flex flex-col w-screen bg-white fixed z-10' >
       
       <div className='flex flex-col bg-lwfs1 text-white p-3' >
-        <h5>feedback@lwfoundation.org</h5>
-        <h5>+44 099 647 7484</h5>
+      <div className='flex gap-2'><MdOutlineEmail /><h5 className='text-xs'>feedback@lwfoundation.org</h5></div>
+
+      <div className='flex gap-2'><FaPhoneSquare /><h5 className='text-xs'>+44 099 647 7484</h5></div>
       </div>
     
       <div className='flex flex-row justify-between pt-1 w-screen'>
