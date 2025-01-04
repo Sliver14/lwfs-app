@@ -24,11 +24,11 @@ function Navbar() {
     <div className='flex flex-col w-screen bg-white fixed z-10' >
       
       <div className='flex flex-col bg-lwfs1 text-white p-3' >
-      <div className='flex gap-2'><MdOutlineEmail /><h5 className='text-xs'>feedback@lwfoundation.org</h5></div>
+      <div className='flex gap-2'><MdOutlineEmail /><h5 className='text-xs font-bold'>feedback@lwfoundation.org</h5></div>
 
-      <div className='flex gap-2'><FaPhoneSquare /><h5 className='text-xs'>+44 099 647 7484</h5></div>
+      <div className='flex gap-2'><FaPhoneSquare /><h5 className='text-xs font-bold'>+44 099 647 7484</h5></div>
 
-      <div className='flex cursor-pointer gap-2' ><img className='w-5 h-5' src='./images/kingschat.png' alt='image'/><a href='https://kingschat.online/user/lwfsch' target="_blank">Follow Us</a></div>
+      <div className='flex cursor-pointer gap-2' ><img className='w-5 h-5' src='./images/kingschat.png' alt='image'/><a className='text-xs font-bold' href='https://kingschat.online/user/lwfsch' target="_blank">Follow Us</a></div>
       </div>
     
       <div className='flex flex-row justify-between pt-1 w-screen'>

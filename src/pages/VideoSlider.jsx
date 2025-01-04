@@ -49,13 +49,21 @@ function VideoSlider({ slides, autoScroll = true, interval = 3000 }) {
       {...swipeHandlers}
     >
       {/* Video Slide */}
-      <video
+      {/* <video
         className="w-full h-full object-cover transition-all duration-500"
         autoPlay
         muted
         loop
         src={slides[currentIndex]?.url}
-      />
+      /> */}
+      {/* Styled Video Embed (iframe method) */}
+      <iframe
+        className="w-full h-full object-cover"
+        src={slides[currentIndex]?.url}
+        frameBorder="0"
+        allow="autoplay; fullscreen"
+        title={slides[currentIndex]?.title}
+      ></iframe>
 
       {/* Navigation Buttons */}
       {/* <button

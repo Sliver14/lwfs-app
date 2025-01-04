@@ -23,11 +23,12 @@ function Home() {
   const closeModal = () => setIsModalOpen(false);
 
   const slides = [
-    {url: "https://drive.google.com/file/d/19PWPsa_May-KOc8IU7kKcWabUhKu2tci/view?usp=drive_link", title: "Jan-comm"},
+    {url: "https://drive.google.com/uc?id=1QUm1B2U71pLwgZ6wyWwVVsuXmkdXZBmV", title: "Jan-comm"},
   ];
 
   const videoSlides = [
-    { url: "https://drive.google.com/file/d/1QUm1B2U71pLwgZ6wyWwVVsuXmkdXZBmV/view?usp=drive_link", title: "video1" },
+    { url: "https://drive.google.com/file/d/1QUm1B2U71pLwgZ6wyWwVVsuXmkdXZBmV/preview"
+      , title: "video1" },
     
   ];
 
