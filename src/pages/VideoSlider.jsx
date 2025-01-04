@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 
+
 function VideoSlider({ slides, autoScroll = true, interval = 3000 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [muted, setMuted] = useState(true); // State to control mute
@@ -49,35 +50,36 @@ function VideoSlider({ slides, autoScroll = true, interval = 3000 }) {
       {...swipeHandlers}
     >
       {/* Video Slide */}
-      {/* <video
+      <video
         className="w-full h-full object-cover transition-all duration-500"
         autoPlay
         muted
         loop
         src={slides[currentIndex]?.url}
-      /> */}
+      />
+
       {/* Styled Video Embed (iframe method) */}
-      <iframe
+      {/* <iframe
         className="w-full h-full object-cover"
         src={slides[currentIndex]?.url}
         frameBorder="0"
         allow="autoplay; fullscreen"
         title={slides[currentIndex]?.title}
-      ></iframe>
+      ></iframe> */}
 
       {/* Navigation Buttons */}
-      {/* <button
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-70 hover:opacity-100 transition-opacity duration-300"
+      <button
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-800 text-3xl p-2 rounded-full opacity-70 hover:opacity-100 transition-opacity duration-300"
         onClick={prevSlide}
       >
         &#10094;
       </button>
       <button
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-70 hover:opacity-100 transition-opacity duration-300"
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-800 text-3xl p-2  opacity-70 hover:opacity-100 transition-opacity duration-300"
         onClick={nextSlide}
       >
         &#10095;
-      </button> */}
+      </button>
 
       {/* Mute/Unmute Button */}
       <button

@@ -23,17 +23,17 @@ function Home() {
   const closeModal = () => setIsModalOpen(false);
 
   const slides = [
-    {url: "https://drive.google.com/uc?id=1QUm1B2U71pLwgZ6wyWwVVsuXmkdXZBmV", title: "Jan-comm"},
+    {url: "http://localhost:5173/Jan-comm.jpg", title: "Jan-comm"},
   ];
-
+  
   const videoSlides = [
-    { url: "https://drive.google.com/file/d/1QUm1B2U71pLwgZ6wyWwVVsuXmkdXZBmV/preview"
+    { url: "http://localhost:5173/video1.mp4/"
       , title: "video1" },
     
   ];
 
   return (
-    <div className='flex flex-col pt-10 w-screen bg-gray-100'>
+    <div className='flex flex-col pt-14 w-screen bg-gray-100'>
        
        {/* Modal */}
       {isModalOpen && (
