@@ -163,7 +163,7 @@ function Home() {
 
       {/* About Foundation School */}
       <div className='flex flex-col bg-lwfs1 text-lwfs3 w-screen py-20'>
-        <div className='flex flex-col ml-5 w-[95%] gap-3 text-gray-500 text-xs' >
+        <div className='flex flex-col ml-5 w-[95%] gap-3 text-gray-300 text-xs' >
           <img className='w-56 h-auto ml-5' src='/images/LWFS-LOGO-3.png' alt='images'/>
           <h1 className='text-md' >Loveworld Foundation School is a compulsory part of our Church Ministry, with clearly defined Aims and Objectives as summarized below.</h1>
           <p>1. To preserve every eligible first timer or new convert in your Church, and successfully transit a soul saved into a soul won.</p>
