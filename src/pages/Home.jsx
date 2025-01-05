@@ -36,7 +36,7 @@ function Home() {
   ];
 
   return (
-    <div className='flex flex-col pt-14 w-screen bg-white font-sans'>
+    <div className='flex flex-col pt-14 w-screen text-md bg-white font-sans'>
        <div className='flex flex-col pt-20' >
            {/* Modal */}
       {isModalOpen && (
@@ -106,22 +106,22 @@ function Home() {
         </div>
       </div>
 
-      {/* Resource center video slider */}
-      <div className="flex flex-col justify-center items-center bg-gray-100">
-        <h1 className='font-bold my-5' >Directors message</h1>
-        <div className="w-[95%] shadow-lg">
-          {/* Auto-scroll enabled with 5-second interval */}
-          <VideoSlider slides={videoSlides} autoScroll={true} interval={15000} />
-        </div>
-        <button className='bg-lwfs2 text-lwfs3 px-5 py-2 mt-2 hover:font-bold hover:shadow-sm hover:shadow-black rounded-md'>View more</button>
-    </div>
-
       {/* Testimony slider*/}
       <div className='flex flex-col justify-center items-center' >
         <h1>Inspiring Tesimonies</h1>
         <h1>Title</h1>
         <button>Share your Testimony</button>
       </div>
+
+      {/* Resource center video slider */}
+      <div className="flex flex-col justify-center items-center bg-gray-100">
+        <h1 className='font-bold my-5' >Directors message</h1>
+        <div className="w-[95%]">
+          {/* Auto-scroll enabled with 5-second interval */}
+          <VideoSlider slides={videoSlides} autoScroll={true} interval={15000} />
+        </div>
+        <button className='bg-lwfs2 text-lwfs3 px-5 py-2 mt-2 hover:font-bold hover:shadow-sm hover:shadow-black rounded-md'>View more</button>
+    </div>
 
       {/* LWFS News (blog) e.g graduation highlights */}
       <div className='flex flex-col w-screen items-center justify-center'>
@@ -155,19 +155,64 @@ function Home() {
         <button>Visit Store</button>
       </div>
 
+      {/* Prayer of Salvation */}
+
+      {/* Explore our platforms */}
+
+      {/* Footer */}
+
       {/* About Foundation School */}
-      <div className='flex flex-col justify-center items-center'>
-        <img src='' alt='images'/>
-        <h1>leromipsom nufjfjufnf fhjdhdjddh hdhdhdh </h1>
+      <div className='flex flex-col bg-lwfs1 text-lwfs3 w-screen py-20'>
+        <div className='flex flex-col ml-5 w-[95%] gap-3 text-gray-500 text-xs' >
+          <img className='w-56 h-auto ml-5' src='/images/LWFS-LOGO-3.png' alt='images'/>
+          <h1 className='text-md' >Loveworld Foundation School is a compulsory part of our Church Ministry, with clearly defined Aims and Objectives as summarized below.</h1>
+          <p>1. To preserve every eligible first timer or new convert in your Church, and successfully transit a soul saved into a soul won.</p>
+          <p>2. To introduce the new converts and new members in your Church to the Foundational Doctrines of our Christianity and the Principles and Structures of our Ministry</p>
+          <p> 3. To help them understand our Vision and Mission, and see their definite role in them.</p>
+          <p> 4. To introduce them to the discipline and rigor of consistent learning, self-study, carrying out Christian exercises and producing results.</p>
+          <p> 5. To introduce them to fellowship with fellow Christians and the Holy Spirit.</p>
+          <p> 6. To set them on an irreversible path of continuous growth and service in the Local Assembly and beyond.</p>
+          <p> 7. To fulfill the first requirement for eligibility and consideration for higher responsibilities in Ministry</p>
+        
+        </div>
+
+        {/* Contact Us */}
+        <div>
+          <h1>Contact Us: </h1>
+          <div>
+            <p>Email Us</p>
+            <p>info@lwfoundationschool.com</p>
+          </div>
+          <div>
+            <p>Kingschat</p>
+            <p>@lwfsch</p>
+          </div>
+         
+          <div>
+            <p>Call Us: </p>
+            <p>+234 80 3502 4986</p>
+          </div>
+        </div>
+
+        <div>
+          <h1>Platforms</h1>
+          <p>Online Class</p>
+          <p>Resource Center</p>
+          <p>LWFS Store</p>
+          <p>Testimony Bank</p>
+        </div>
+
+        <div>
+          <p>Copyright && 2025 Loveworld Foundation School. All Rights Reserveed.</p>
+          <div>
+            <p>Privacy Policy</p>
+            <p>Contact Us</p>
+            <p>Blog</p>
+          </div>
+          
+        </div>
       </div>
 
-      {/* footer */}
-      <div className='flex flex-col justify-center items-center'>
-        Quicklinks legal privacy_policy
-        Contact Us, Contact info, Office Address
-        Social media- Kingschat  
-        2025 All rights reserverd | privacy_policy
-      </div>
        </div>
       
      
