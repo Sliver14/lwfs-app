@@ -127,7 +127,7 @@ function Home() {
       <div className='flex flex-col w-screen items-center justify-center'>
       <div className='flex flex-col w-[98%] shadow-lg' >
         <h1 className='font-bold ml-10 my-2'>Blog</h1>
-        <div className='flex flex-col pl-3 m-1 border-2 rounded-md border-gray-100  hover:border-2 hover:border-lwfs2 hover:rounded-lg'>
+        <div className='flex flex-col pl-3 m-1 border-2 rounded-md border-gray-100  hover:border-[0.8px] hover:border-lwfs2 hover:rounded-lg'>
           <div className='flex flex-col h-auto w-[98%] mt-3' >
             <img className='flex h-full w-full rounded-lg ' src='/images/za-zone-1.jpg' alt=''/>
           </div>
