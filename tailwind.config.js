@@ -15,7 +15,10 @@ export default {
         lwfs3: "#eef0f2",
         lwfs4: "#141414",
         lwfs5: "#eec643",
-      }
+      },
+      fontFamily: {
+        sans: ['Inter', 'ui-sans-serif', 'system-ui'], // Add Inter as the default sans-serif
+      },
     },
   },
   plugins: [],

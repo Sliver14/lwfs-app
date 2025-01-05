@@ -51,13 +51,13 @@ function ImageSlider({ slides, autoScroll = true, interval = 3000 }) {
 
       {/* Navigation Buttons */}
       <button
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-70 hover:opacity-100 transition-opacity duration-300"
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-800 text-3xl p-2 rounded-full opacity-70 hover:opacity-100 transition-opacity duration-300"
         onClick={prevSlide}
       >
         &#10094;
       </button>
       <button
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-70 hover:opacity-100 transition-opacity duration-300"
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-800 text-3xl p-2 rounded-full opacity-70 hover:opacity-100 transition-opacity duration-300"
         onClick={nextSlide}
       >
         &#10095;
