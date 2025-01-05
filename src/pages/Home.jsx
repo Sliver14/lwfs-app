@@ -113,7 +113,7 @@ function Home() {
           {/* Auto-scroll enabled with 5-second interval */}
           <VideoSlider slides={videoSlides} autoScroll={true} interval={15000} />
         </div>
-        <button className='bg-lwfs5 text-lwfs4 px-5 py-2 mt-2 hover:font-bold hover:shadow-sm hover:shadow-black rounded-md'>View more</button>
+        <button className='bg-lwfs2 text-lwfs3 px-5 py-2 mt-2 hover:font-bold hover:shadow-sm hover:shadow-black rounded-md'>View more</button>
     </div>
 
       {/* Testimony slider*/}
@@ -135,14 +135,14 @@ function Home() {
           <div className='flex gap-5 my-3'>
             <button className='bg-lwfs2 text-white text-sm px-2 py-[3px] rounded-sm'>Blog</button>
             <h1 className='flex items-center gap-1'><IoTimeOutline /> post date</h1>
-            <h1 className='flex items-center'><GrView /> number of views</h1>
+            <h1 className='flex items-center gap-1'><GrView /> number of views</h1>
           </div>
 
           <div className='flex flex-col  '>
             <h1 className='font-bold '>Graduation Highlight from ZA Zone 1</h1>
             <p className='text-sm text-gray-700 w-[98%]'>hudnundnhbv gvsbydy xsbysbydhsdnsbtdbsygds tvvvsvs khbsjtvsv ybstjgsdgdsbycs ysgydsbydygh ybysdygdsys jbysdgsy </p>
           </div>
-          <button className='flex items-center w-40 gap-1 border-2 border-slate-200 text-lwfs4 px-5 py-2 my-2 hover:font-bold hover:shadow-sm hover:bg-lwfs5 hover:border-0 hover:shadow-black rounded-md'>Read More <IoChevronForwardOutline className='text-xl'/></button>
+          <button className='flex items-center w-40 gap-1 border-2 border-slate-200 text-lwfs4 px-5 py-2 my-2 hover:font-bold hover:shadow-sm hover:bg-lwfs2 hover:text-lwfs3 hover:border-0 hover:shadow-black rounded-md'>Read More <IoChevronForwardOutline className='text-xl'/></button>
         </div>
       </div>
       </div>
