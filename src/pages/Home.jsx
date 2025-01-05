@@ -79,17 +79,6 @@ function Home() {
                 <button className='bg-lwfs2 w-32 mt-5 rounded-md text-white p-2 mb-5' >Create Account </button>
                 <span onClick={()=>{setIsLogIn(true),setIRegister(false)}}>Already Registered? <a className='text-lwfs2 cursor-pointer' >Sign in</a></span>
               </div>
-
-              {/* <h2>Create Account</h2>
-              <form action="">
-              <input type="text" placeholder='Email'/>
-              <input type="password" placeholder='Password'/>
-              <button >Create Account</button>
-              </form>
-              <span onClick={()=>{
-                setIsLogIn(true);
-                setIRegister(false);
-                }}>Sign In</span> */}
             </>  
             }
 
@@ -162,7 +151,7 @@ function Home() {
       {/* Footer */}
 
       {/* About Foundation School */}
-      <div className='flex flex-col bg-lwfs1 text-lwfs3 w-screen py-20'>
+      {/* <div className='flex flex-col bg-lwfs1 text-lwfs3 w-screen py-20'>
         <div className='flex flex-col ml-5 w-[95%] gap-3 text-gray-300 text-xs' >
           <img className='w-56 h-auto ml-5' src='/images/LWFS-LOGO-3.png' alt='images'/>
           <h1 className='text-md' >Loveworld Foundation School is a compulsory part of our Church Ministry, with clearly defined Aims and Objectives as summarized below.</h1>
@@ -174,44 +163,52 @@ function Home() {
           <p> 6. To set them on an irreversible path of continuous growth and service in the Local Assembly and beyond.</p>
           <p> 7. To fulfill the first requirement for eligibility and consideration for higher responsibilities in Ministry</p>
         
-        </div>
+        </div> */}
 
         {/* Contact Us */}
-        <div>
-          <h1>Contact Us: </h1>
-          <div>
-            <p>Email Us</p>
-            <p>info@lwfoundationschool.com</p>
+        {/* <div className='flex flex-col ml-5 pt-10 gap-2 text-sm text-gray-300' >
+          <h1 className='text-xl font-bold text-lwfs3' >Contact Us </h1>
+          <div className='pb-3'>PO Box Aseese, Lagos Ibadan Express.</div>
+          <div className='flex gap-5'>
+            <p>Email Us :</p>
+            <a className='hover:text-red-600 ' href='mailto:info@lwfoundationschool.com'>info@lwfoundationschool.com</a>
           </div>
-          <div>
-            <p>Kingschat</p>
-            <p>@lwfsch</p>
+
+          <div className='flex gap-5'>
+            <p>Call Us : </p>
+            <a className='hover:text-red-600 ' href='tel:+2348035024986'>+234 80 3502 4986</a>
+          </div>
+
+          <div className='flex gap-5'>
+            <p>Kingschat :</p>
+            <a className='hover:text-red-600 ' href='https://kingschat.online/user/lwfsch' target="_blank">@lwfsch</a>
           </div>
          
-          <div>
-            <p>Call Us: </p>
-            <p>+234 80 3502 4986</p>
+        </div> */}
+
+        {/* Platforms */}
+        {/* <div className='flex flex-col ml-5 pt-10 gap-2 text-sm text-gray-300'>
+          <h1 className='text-xl font-bold text-lwfs3'>Platforms</h1>
+          <p className='hover:text-red-600  cursor-pointer' >Online Class</p>
+          <p className='hover:text-red-600  cursor-pointer'>Resource Center</p>
+          <p className='hover:text-red-600  cursor-pointer'>LWFS Store</p>
+          <p className='hover:text-red-600 cursor-pointer'>Testimony Bank</p>
+          <p className='hover:text-red-600  cursor-pointer' onClick={()=>{navigate("/live-tv")}}>Live TV</p>
+        </div>
+
+        <div className='flex flex-col ml-5 pt-10 gap-5 text-sm text-gray-300'>
+          <div className='flex'>
+            <p>Copyright &copy; 2025 <span className='text-red-600'>Loveworld Foundation School</span>. All Rights Reserveed.</p>
           </div>
-        </div>
-
-        <div>
-          <h1>Platforms</h1>
-          <p>Online Class</p>
-          <p>Resource Center</p>
-          <p>LWFS Store</p>
-          <p>Testimony Bank</p>
-        </div>
-
-        <div>
-          <p>Copyright && 2025 Loveworld Foundation School. All Rights Reserveed.</p>
-          <div>
-            <p>Privacy Policy</p>
-            <p>Contact Us</p>
-            <p>Blog</p>
+          
+          <div className='flex gap-5'>
+            <p className='hover:text-red-600  cursor-pointer' onClick={()=>{navigate("/privacy")}}>Privacy Policy</p>
+            <p className='hover:text-red-600  cursor-pointer'>Contact Us</p>
+            <p className='hover:text-red-600  cursor-pointer'>Blog</p>
           </div>
           
         </div>
-      </div>
+      </div> */}
 
        </div>
       

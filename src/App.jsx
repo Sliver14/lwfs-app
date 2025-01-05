@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import User from "./pages/User";
 import LiveTv from "./pages/LiveTv";
 import Navbar from './component/Navbar';
+import Privacy from "./pages/Privacy";
+import Footer from './component/Footer';
 
 
 function App() {
@@ -16,7 +18,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/user" element={<User />} />
         <Route path="/live-tv" element={<LiveTv />} />
+        <Route path="/privacy" element={<Privacy />} />
       </Routes>
+      <Footer />
     </Router>
   )
 }
