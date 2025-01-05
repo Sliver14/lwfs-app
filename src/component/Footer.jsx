@@ -53,7 +53,7 @@ function Footer() {
         </div>
 
         {/* Copy Rights */}
-        <div className='bg-lwfs4 mt-10 py-10'>
+        <div className='bg-lwfs4 mt-10 py-10 pr-3'>
         <div className='flex flex-col ml-5 gap-5 text-sm text-gray-300'>
           <div className='flex'>
             <p>Copyright &copy; 2025 <span className='text-red-600 cursor-pointer' onClick={()=>{navigate("/privacy")}}>Loveworld Foundation School</span>. All Rights Reserveed.</p>

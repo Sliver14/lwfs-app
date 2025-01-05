@@ -128,8 +128,8 @@ function Home() {
           </div>
 
           <div className='flex flex-col  '>
-            <h1 className='font-bold '>Graduation Highlight from ZA Zone 1</h1>
-            <p className='text-sm text-gray-700 w-[98%]'>hudnundnhbv gvsbydy xsbysbydhsdnsbtdbsygds tvvvsvs khbsjtvsv ybstjgsdgdsbycs ysgydsbydygh ybysdygdsys jbysdgsy </p>
+            <h1 className='font-bold text-base'>GRADUATION HiIGHLIGHT FROM ZA ZONE 1</h1>
+            <p className='text-sm text-gray-700 w-[98%]'>It was a huge success as we record the highest graduation this quarter. Gory to God.</p>
           </div>
           <button className='flex items-center w-40 gap-1 border-2 border-slate-200 text-lwfs4 px-5 py-2 my-2 hover:font-bold hover:shadow-sm hover:bg-lwfs2 hover:text-lwfs3 hover:border-0 hover:shadow-black rounded-md'>Read More <IoChevronForwardOutline className='text-xl'/></button>
         </div>
