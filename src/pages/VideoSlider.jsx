@@ -31,10 +31,10 @@ function VideoSlider({ slides, autoScroll = true, interval = 3000 }) {
 //     setCurrentIndex(index);
 //   };
 
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: nextSlide,
-    onSwipedRight: prevSlide,
-  });
+  // const swipeHandlers = useSwipeable({
+  //   onSwipedLeft: nextSlide,
+  //   onSwipedRight: prevSlide,
+  // });
 
   const toggleMute = () => {
     setMuted((prevMuted) => !prevMuted); // Toggle muted state
@@ -47,7 +47,7 @@ function VideoSlider({ slides, autoScroll = true, interval = 3000 }) {
   return (
     <div
       className="flex flex-col w-full h-full overflow-hidden rounded-lg"
-      {...swipeHandlers}
+      // {...swipeHandlers}
     >
       {/* Video Slide */}
       {/* <video
