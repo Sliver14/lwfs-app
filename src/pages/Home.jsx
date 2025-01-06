@@ -26,11 +26,11 @@ function Home() {
   const closeModal = () => setIsModalOpen(false);
 
   const slides = [
-    {url: "http://localhost:5173/Jan-comm.jpg", title: "Jan-comm"},
+    {url: "/Jan-comm.jpg", title: "Jan-comm"},
   ];
   
   const videoSlides = [
-    { url: "http://localhost:5173/video1.mp4"
+    { url: "https://player.vimeo.com/video/1044177288?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
       , title: "video1" },
     
   ];
@@ -104,10 +104,10 @@ function Home() {
 
       {/* Resource center video slider */}
       <div className="flex flex-col justify-center items-center bg-gray-100">
-        <h1 className='font-bold my-5' >Directors message</h1>
+        <h1 className='font-bold mt-3' >Directors message</h1>
         <div className="w-[95%]">
           {/* Auto-scroll enabled with 5-second interval */}
-          <VideoSlider slides={videoSlides} autoScroll={true} interval={15000} />
+          <VideoSlider slides={videoSlides} autoScroll={true} interval={15000} autoplay={1} byline={0} portrait={0} />
         </div>
         <button className='bg-lwfs2 text-lwfs3 px-5 py-2 mt-2 hover:font-bold hover:shadow-sm hover:shadow-black rounded-md'>View more</button>
     </div>

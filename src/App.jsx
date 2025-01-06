@@ -7,6 +7,7 @@ import LiveTv from "./pages/LiveTv";
 import Navbar from './component/Navbar';
 import Privacy from "./pages/Privacy";
 import Footer from './component/Footer';
+import PageNotFound from './component/PageNotFound';
 
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
         <Route path="/user" element={<User />} />
         <Route path="/live-tv" element={<LiveTv />} />
         <Route path="/privacy" element={<Privacy />} />
+        <Route path="*" element={<PageNotFound />} />
+
       </Routes>
       <Footer />
     </Router>

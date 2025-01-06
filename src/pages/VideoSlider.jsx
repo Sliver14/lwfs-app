@@ -46,17 +46,21 @@ function VideoSlider({ slides, autoScroll = true, interval = 3000 }) {
 
   return (
     <div
-      className="relative w-full h-full overflow-hidden rounded-lg"
+      className="flex flex-col w-full h-full overflow-hidden rounded-lg"
       {...swipeHandlers}
     >
       {/* Video Slide */}
-      <video
+      {/* <video
         className="w-full h-full object-cover transition-all duration-500"
         autoPlay
         muted
         loop
         src={slides[currentIndex]?.url}
-      />
+      /> */}
+
+      <iframe src={slides[currentIndex]?.url} className="w-full h-[300px] object-cover ml-2" frameborder="0" allow="autoplay; autoPlay
+        muted
+        loop fullscreen; picture-in-picture; clipboard-write; " title={slides[currentIndex]?.title}></iframe>
 
       {/* Styled Video Embed (iframe method) */}
       {/* <iframe
