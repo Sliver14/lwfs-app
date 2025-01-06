@@ -37,8 +37,8 @@ function Navbar() {
     </div>
 
     {/* botoom Navbar */}
-    <div className='fixed flex bottom-0 right-0 left-0 justify-center items-center p-1 z-20'>
-      <div className='flex flex-col bg-white rounded-full w-[95%] px-12  shadow-xl'>
+    <div className='fixed flex bottom-0 right-0 left-0 justify-center items-center py-1 z-20'>
+      <div className='flex flex-col bg-white rounded-full w-[98%] px-12  shadow-xl'>
 
         <div className='flex content-between justify-between '>
             <NavLink to="/" className={({isActive}) => `flex items-center py-2 ${isActive ? "border-2 border-white border-t-lwfs4 text-lwfs4" : "text-gray-500"}`}>
