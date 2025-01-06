@@ -8,7 +8,8 @@ import { MdOutlineEmail } from "react-icons/md";
 import { FiPhoneCall } from "react-icons/fi";
 import { LiaHomeSolid } from "react-icons/lia";
 import { MdLiveTv } from "react-icons/md";
-import { GiPlatform } from "react-icons/gi";
+import { CgWebsite } from "react-icons/cg";
+import { TfiLayoutListPost } from "react-icons/tfi";
 
 
 
@@ -47,8 +48,13 @@ function Navbar() {
             <NavLink to="/live-tv" className={({isActive}) => `flex items-center py-2 ${isActive ? "border-2 border-white border-t-blue-500 text-blue-500" : "text-gray-500"}`}>
             <MdLiveTv className='text-2xl'/>
             </NavLink>
+
             <NavLink to="/platforms" className={({isActive}) => `flex items-center py-2 ${isActive ? "border-2 border-white border-t-blue-500 text-blue-500" : "text-gray-500"}`}>
-            <GiPlatform className='text-3xl'/>
+            <CgWebsite className='text-3xl'/>
+            </NavLink>
+
+            <NavLink to="/posts" className={({isActive}) => `flex items-center py-2 ${isActive ? "border-2 border-white border-t-blue-500 text-blue-500" : "text-gray-500"}`}>
+            <TfiLayoutListPost className='text-2xl'/>
             </NavLink>
           </div>
       </div>

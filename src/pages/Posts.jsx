@@ -1,9 +1,109 @@
 import React from 'react'
+import { IoTimeOutline } from "react-icons/io5";
+import { GrView } from "react-icons/gr";
+import { IoChevronForwardOutline } from "react-icons/io5";
 
 function Posts() {
   return (
-    <div>
-      
+    <div className='mt-12'>
+      {/* LWFS News (blog) e.g graduation highlights */}
+      <div className='flex flex-col w-screen items-center justify-center'>
+      <div className='flex flex-col w-[98%] shadow-lg' >
+        <h1 className='font-bold text-xl ml-10 my-2'>Post</h1>
+        <div className='flex flex-col pl-3 m-1 border-2 rounded-md border-gray-100  hover:border-[0.8px] hover:border-lwfs2 hover:rounded-lg'>
+          <div className='flex flex-col h-auto w-[98%] mt-3' >
+            <img className='flex h-full w-full rounded-lg ' src='/images/za-zone-1.jpg' alt=''/>
+          </div>
+          
+          <div className='flex gap-5 my-3'>
+            <button className='bg-red-600 text-white text-sm px-2 py-[3px] rounded-sm'>Blog</button>
+            <h1 className='flex items-center gap-1'><IoTimeOutline /> post date</h1>
+            <h1 className='flex items-center gap-1'><GrView /> number of views</h1>
+          </div>
+
+          <div className='flex flex-col  '>
+            <h1 className='font-bold text-base'>GRADUATION HIGHLIGHT FROM ZA ZONE 1</h1>
+            <p className='text-sm text-gray-700 w-[98%]'>It was a huge success as we record the highest graduation this quarter. Gory to God.</p>
+          </div>
+          <button className='flex items-center w-40 gap-1 border-2 border-slate-200 text-lwfs4 px-5 py-2 my-2 hover:font-bold hover:shadow-sm hover:bg-lwfs2 hover:text-lwfs3 hover:border-0 hover:shadow-black rounded-md'>Read More <IoChevronForwardOutline className='text-xl'/></button>
+        </div>
+
+        <div className='flex flex-col pl-3 m-1 border-2 rounded-md border-gray-100  hover:border-[0.8px] hover:border-lwfs2 hover:rounded-lg'>
+          <div className='flex flex-col h-auto w-[98%] mt-3' >
+            <img className='flex h-full w-full rounded-lg ' src='/images/za-zone-1.jpg' alt=''/>
+          </div>
+          
+          <div className='flex gap-5 my-3'>
+            <button className='bg-red-600 text-white text-sm px-2 py-[3px] rounded-sm'>Blog</button>
+            <h1 className='flex items-center gap-1'><IoTimeOutline /> post date</h1>
+            <h1 className='flex items-center gap-1'><GrView /> number of views</h1>
+          </div>
+
+          <div className='flex flex-col  '>
+            <h1 className='font-bold text-base'>GRADUATION HIGHLIGHT FROM ZA ZONE 1</h1>
+            <p className='text-sm text-gray-700 w-[98%]'>It was a huge success as we record the highest graduation this quarter. Gory to God.</p>
+          </div>
+          <button className='flex items-center w-40 gap-1 border-2 border-slate-200 text-lwfs4 px-5 py-2 my-2 hover:font-bold hover:shadow-sm hover:bg-lwfs2 hover:text-lwfs3 hover:border-0 hover:shadow-black rounded-md'>Read More <IoChevronForwardOutline className='text-xl'/></button>
+        </div>
+
+        <div className='flex flex-col pl-3 m-1 border-2 rounded-md border-gray-100  hover:border-[0.8px] hover:border-lwfs2 hover:rounded-lg'>
+          <div className='flex flex-col h-auto w-[98%] mt-3' >
+            <img className='flex h-full w-full rounded-lg ' src='/images/za-zone-1.jpg' alt=''/>
+          </div>
+          
+          <div className='flex gap-5 my-3'>
+            <button className='bg-red-600 text-white text-sm px-2 py-[3px] rounded-sm'>Blog</button>
+            <h1 className='flex items-center gap-1'><IoTimeOutline /> post date</h1>
+            <h1 className='flex items-center gap-1'><GrView /> number of views</h1>
+          </div>
+
+          <div className='flex flex-col  '>
+            <h1 className='font-bold text-base'>GRADUATION HIGHLIGHT FROM ZA ZONE 1</h1>
+            <p className='text-sm text-gray-700 w-[98%]'>It was a huge success as we record the highest graduation this quarter. Gory to God.</p>
+          </div>
+          <button className='flex items-center w-40 gap-1 border-2 border-slate-200 text-lwfs4 px-5 py-2 my-2 hover:font-bold hover:shadow-sm hover:bg-lwfs2 hover:text-lwfs3 hover:border-0 hover:shadow-black rounded-md'>Read More <IoChevronForwardOutline className='text-xl'/></button>
+        </div>
+
+        <div className='flex flex-col pl-3 m-1 border-2 rounded-md border-gray-100  hover:border-[0.8px] hover:border-lwfs2 hover:rounded-lg'>
+          <div className='flex flex-col h-auto w-[98%] mt-3' >
+            <img className='flex h-full w-full rounded-lg ' src='/images/za-zone-1.jpg' alt=''/>
+          </div>
+          
+          <div className='flex gap-5 my-3'>
+            <button className='bg-red-600 text-white text-sm px-2 py-[3px] rounded-sm'>Blog</button>
+            <h1 className='flex items-center gap-1'><IoTimeOutline /> post date</h1>
+            <h1 className='flex items-center gap-1'><GrView /> number of views</h1>
+          </div>
+
+          <div className='flex flex-col  '>
+            <h1 className='font-bold text-base'>GRADUATION HIGHLIGHT FROM ZA ZONE 1</h1>
+            <p className='text-sm text-gray-700 w-[98%]'>It was a huge success as we record the highest graduation this quarter. Gory to God.</p>
+          </div>
+          <button className='flex items-center w-40 gap-1 border-2 border-slate-200 text-lwfs4 px-5 py-2 my-2 hover:font-bold hover:shadow-sm hover:bg-lwfs2 hover:text-lwfs3 hover:border-0 hover:shadow-black rounded-md'>Read More <IoChevronForwardOutline className='text-xl'/></button>
+        </div>
+
+        <div className='flex flex-col pl-3 m-1 border-2 rounded-md border-gray-100  hover:border-[0.8px] hover:border-lwfs2 hover:rounded-lg'>
+          <div className='flex flex-col h-auto w-[98%] mt-3' >
+            <img className='flex h-full w-full rounded-lg ' src='/images/za-zone-1.jpg' alt=''/>
+          </div>
+          
+          <div className='flex gap-5 my-3'>
+            <button className='bg-red-600 text-white text-sm px-2 py-[3px] rounded-sm'>Blog</button>
+            <h1 className='flex items-center gap-1'><IoTimeOutline /> post date</h1>
+            <h1 className='flex items-center gap-1'><GrView /> number of views</h1>
+          </div>
+
+          <div className='flex flex-col  '>
+            <h1 className='font-bold text-base'>GRADUATION HIGHLIGHT FROM ZA ZONE 1</h1>
+            <p className='text-sm text-gray-700 w-[98%]'>It was a huge success as we record the highest graduation this quarter. Gory to God.</p>
+          </div>
+          <button className='flex items-center w-40 gap-1 border-2 border-slate-200 text-lwfs4 px-5 py-2 my-2 hover:font-bold hover:shadow-sm hover:bg-lwfs2 hover:text-lwfs3 hover:border-0 hover:shadow-black rounded-md'>Read More <IoChevronForwardOutline className='text-xl'/></button>
+        </div>
+        
+
+
+      </div>
+      </div>
     </div>
   )
 }

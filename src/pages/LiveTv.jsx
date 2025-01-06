@@ -3,7 +3,7 @@ import ReactPlayer from 'react-player';
 
 function LiveTv() {
   return (
-    <div className='flex flex-col pt-40'>
+    <div className='flex flex-col pt-16'>
       <div>
         <ReactPlayer 
           url="https://www.youtube.com/live/ZADm4ss9f04?si=I8GjZHYfWHbwm3ri"
