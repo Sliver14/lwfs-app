@@ -58,13 +58,14 @@ function VideoSlider({ slides, autoScroll = true, interval = 3000 }) {
         src={slides[currentIndex]?.url}
       /> */}
 
-      <iframe src={slides[currentIndex]?.url} className="w-full h-[300px] object-cover" frameborder="0" 
-      autoPlay
-      muted
-      loop 
-      fullscreen 
-      picture-in-picture 
-      clipboard-write title={slides[currentIndex]?.title}></iframe>
+      <iframe src={slides[currentIndex]?.url}
+      className="w-[100%] h-[300px] object-cover transition-all duration-500" 
+        frameBorder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowFullScreen
+        title={slides[currentIndex]?.title}>
+
+      </iframe>
 
       {/* Styled Video Embed (iframe method) */}
       {/* <iframe

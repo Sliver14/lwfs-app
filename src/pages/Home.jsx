@@ -30,7 +30,7 @@ function Home() {
   ];
   
   const videoSlides = [
-    { url: "https://player.vimeo.com/video/1044177288?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+    { url: "https://player.vimeo.com/video/1044177288?autoplay=1&loop=1&title=0&byline=0&muted=1&portrait=0"
       , title: "video1" },
     
   ];
@@ -107,7 +107,7 @@ function Home() {
         <h1 className='font-bold mt-3' >Directors message</h1>
         <div className="w-[95%]">
           {/* Auto-scroll enabled with 5-second interval */}
-          <VideoSlider slides={videoSlides} autoScroll={true} interval={15000} autoplay={1} byline={0} portrait={0} />
+          <VideoSlider slides={videoSlides} autoScroll={true} interval={15000}/>
         </div>
         <button className='bg-lwfs2 text-lwfs3 px-5 py-2 mt-2 hover:font-bold hover:shadow-sm hover:shadow-black rounded-md'>View more</button>
     </div>
