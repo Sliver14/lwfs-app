@@ -122,7 +122,7 @@ function Home() {
           </div>
           
           <div className='flex gap-5 my-3'>
-            <button className='bg-lwfs2 text-white text-sm px-2 py-[3px] rounded-sm'>Blog</button>
+            <button className='bg-red-600 text-white text-sm px-2 py-[3px] rounded-sm'>Blog</button>
             <h1 className='flex items-center gap-1'><IoTimeOutline /> post date</h1>
             <h1 className='flex items-center gap-1'><GrView /> number of views</h1>
           </div>
