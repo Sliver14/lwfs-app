@@ -41,19 +41,19 @@ function Navbar() {
       <div className='flex flex-col bg-white rounded-full w-[95%] px-12  shadow-xl'>
 
         <div className='flex content-between justify-between '>
-            <NavLink to="/" className={({isActive}) => `flex items-center py-2 ${isActive ? "border-2 border-white border-t-blue-500 text-blue-500" : "text-gray-500"}`}>
+            <NavLink to="/" className={({isActive}) => `flex items-center py-2 ${isActive ? "border-2 border-white border-t-lwfs4 text-lwfs4" : "text-gray-500"}`}>
             <LiaHomeSolid className='text-3xl'/>
             </NavLink>
 
-            <NavLink to="/live-tv" className={({isActive}) => `flex items-center py-2 ${isActive ? "border-2 border-white border-t-blue-500 text-blue-500" : "text-gray-500"}`}>
+            <NavLink to="/live-tv" className={({isActive}) => `flex items-center py-2 ${isActive ? "border-2 border-white border-t-lwfs4 text-lwfs4" : "text-gray-500"}`}>
             <MdLiveTv className='text-3xl'/>
             </NavLink>
 
-            <NavLink to="/platforms" className={({isActive}) => `flex items-center py-2 ${isActive ? "border-2 border-white border-t-blue-500 text-blue-500" : "text-gray-500"}`}>
+            <NavLink to="/platforms" className={({isActive}) => `flex items-center py-2 ${isActive ? "border-2 border-white border-t-lwfs4 text-lwfs4" : "text-gray-500"}`}>
             <FaCompass  className='text-3xl'/>
             </NavLink>
 
-            <NavLink to="/posts" className={({isActive}) => `flex items-center py-2   ${isActive ? "border-2 border-white border-t-blue-500 text-blue-500" : "text-gray-500"}`}>
+            <NavLink to="/posts" className={({isActive}) => `flex items-center py-2   ${isActive ? "border-2 border-white border-t-lwfs4 text-lwfs4" : "text-gray-500"}`}>
             <IoNotifications className='text-3xl'/>
             </NavLink>
           </div>

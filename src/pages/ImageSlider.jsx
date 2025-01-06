@@ -45,7 +45,7 @@ function ImageSlider({ slides, autoScroll = true, interval = 3000 }) {
     >
       {/* Slide */}
       <div
-        className="w-full h-full bg-cover bg-center transition-all duration-500"
+        className="w-full h-full bg-cover bg-center transition-all duration-500 object-cover"
         style={{ backgroundImage: `url(${slides[currentIndex]?.url})` }}
       ></div>
 

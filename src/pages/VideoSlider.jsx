@@ -59,7 +59,7 @@ function VideoSlider({ slides, autoScroll = true, interval = 3000 }) {
       /> */}
 
       <iframe src={slides[currentIndex]?.url}
-      className="w-[100%] h-[300px] object-cover transition-all duration-500" 
+      className="w-[100%] h-full object-cover transition-all duration-500" 
         frameBorder="0"
         allow="autoplay; fullscreen; picture-in-picture"
         allowFullScreen
