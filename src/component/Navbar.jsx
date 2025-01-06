@@ -36,22 +36,24 @@ function Navbar() {
     </div>
 
     {/* botoom Navbar */}
-    <div className='fixed flex bottom-0 right-0 left-0 justify-center items-center p-3 bg-white shadow-lg z-20'>
-      <div>
-        <div className='flex gap-3'>
-          <NavLink to="/" className={({isActive}) => `flex items-center  ${isActive ? "text-blue-500" : "text-black"}`}>
-          <LiaHomeSolid className='text-3xl'/>
-          </NavLink>
+    <div className='fixed flex bottom-0 right-0 left-0 justify-center items-center p-1 z-20'>
+      <div className='flex flex-col bg-white rounded-full w-[95%] px-12  shadow-xl'>
 
-          <NavLink to="/live-tv" className={({isActive}) => `flex items-center  ${isActive ? "text-blue-500" : "text-black"}`}>
-          <MdLiveTv className='text-3xl'/>
-          </NavLink>
-          <NavLink to="/platforms" className={({isActive}) => `flex items-center  ${isActive ? "text-blue-500" : "text-black"}`}>
-          <GiPlatform className='text-3xl'/>
-          </NavLink>
-        </div>
-        
+        <div className='flex content-between justify-between '>
+            <NavLink to="/" className={({isActive}) => `flex items-center py-2 ${isActive ? "border-2 border-white border-t-blue-500 text-blue-500" : "text-gray-500"}`}>
+            <LiaHomeSolid className='text-3xl'/>
+            </NavLink>
+
+            <NavLink to="/live-tv" className={({isActive}) => `flex items-center py-2 ${isActive ? "border-2 border-white border-t-blue-500 text-blue-500" : "text-gray-500"}`}>
+            <MdLiveTv className='text-2xl'/>
+            </NavLink>
+            <NavLink to="/platforms" className={({isActive}) => `flex items-center py-2 ${isActive ? "border-2 border-white border-t-blue-500 text-blue-500" : "text-gray-500"}`}>
+            <GiPlatform className='text-3xl'/>
+            </NavLink>
+          </div>
       </div>
+        
+        
     </div>
 
   

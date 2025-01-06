@@ -77,26 +77,26 @@ function VideoSlider({ slides, autoScroll = true, interval = 3000 }) {
       ></iframe> */}
 
       {/* Navigation Buttons */}
-      <button
+      {/* <button
         className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-800 text-3xl p-2 rounded-full opacity-70 hover:opacity-100 transition-opacity duration-300"
         onClick={prevSlide}
       >
         &#10094;
-      </button>
-      <button
+      </button> */}
+      {/* <button
         className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-800 text-3xl p-2  opacity-70 hover:opacity-100 transition-opacity duration-300"
         onClick={nextSlide}
       >
         &#10095;
-      </button>
+      </button> */}
 
       {/* Mute/Unmute Button */}
-      <button
+      {/* <button
         className="absolute top-4 right-4 bg-gray-800 text-white p-2 rounded-full opacity-70 hover:opacity-100 transition-opacity duration-300"
         onClick={toggleMute}
       >
         {muted ? "Unmute" : "Mute"}
-      </button>
+      </button> */}
 
       {/* Slider Indicator */}
       {/* <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
