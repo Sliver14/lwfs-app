@@ -9,7 +9,7 @@ function Posts() {
       {/* LWFS News (blog) e.g graduation highlights */}
       <div className='flex flex-col w-screen items-center justify-center'>
       <div className='flex flex-col w-[98%] shadow-lg' >
-        <h1 className='font-bold text-xl ml-10 my-2'>Post</h1>
+        <h1 className='font-bold text-xl ml-10 my-2'>Recent Posts</h1>
 
         <div className='flex flex-col pl-3 m-1 border-2 rounded-md border-gray-100  hover:border-[0.8px] hover:border-lwfs2 hover:rounded-lg'>
           <div className='flex flex-col h-auto w-[98%] mt-3' >
