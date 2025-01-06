@@ -46,12 +46,12 @@ function Home() {
       </div>
 
       {/* Resource center video slider */}
-      <div className="flex flex-col justify-center items-center  bg-gray-100">
-        <div className="w-[300px] h-full">
+      <div className="flex flex-col justify-center items-center  bg-gray-100 pt-3">
+        <div className="w-[95%] h-auto">
           {/* Auto-scroll enabled with 5-second interval */}
           <VideoSlider slides={videoSlides} autoScroll={true} interval={15000}/>
         </div>
-        <button className='bg-lwfs2 text-lwfs3 px-5 py-2 mb-5 hover:font-bold hover:shadow-sm hover:shadow-black rounded-md cursor-pointer'>View more</button>
+        <button className='bg-lwfs2 text-lwfs3 px-5 py-2 mb-5 mt-2 hover:font-bold hover:shadow-sm hover:shadow-black rounded-md cursor-pointer'>View more</button>
     </div>
 
       {/* Programmes */}
