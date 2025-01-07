@@ -18,7 +18,7 @@ function Home() {
   ];
   
   const videoSlides = [
-    { url: "https://player.vimeo.com/video/1044177288?autoplay=1&loop=1&title=0&byline=0&muted=1&portrait=0"
+    { url: "https://embed.ceflix.org/video/1881644"
       , title: "video1" },
     
   ];
@@ -46,8 +46,8 @@ function Home() {
       </div>
 
       {/* Resource center video slider */}
-      <div className="flex flex-col justify-center items-center  bg-gray-100 pt-3">
-        <div className="w-[95%] h-auto">
+      <div className="">
+        <div className="w-[100%] h-[38vh] overflow-hidden">
           {/* Auto-scroll enabled with 5-second interval */}
           <VideoSlider slides={videoSlides} autoScroll={true} interval={15000}/>
         </div>

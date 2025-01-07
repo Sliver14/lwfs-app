@@ -4,13 +4,17 @@ import ReactPlayer from 'react-player';
 function LiveTv() {
   return (
     <div className='flex flex-col pt-16'>
-      <div>
-        <ReactPlayer 
-          url="https://www.youtube.com/live/ZADm4ss9f04?si=I8GjZHYfWHbwm3ri"
-          controls
-          width="100%"
-          height="400px"
-        />
+      <div className='w-screen h-[38vh]'>
+      <iframe src="https://embed.ceflix.org/video/1881625"
+      className="w-full h-full object-contain " 
+        frameBorder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        sandbox="allow-scripts allow-same-origin allow-popups"
+        controlslist="nodownload"
+        allowFullScreen
+        >
+
+      </iframe>
       </div>
 
       <div className='flex flex-col mt-5 bg-gray-400 pb-5 px-5'>
