@@ -63,7 +63,7 @@ function VideoSlider({ slides, autoScroll = true, interval = 3000 }) {
         frameBorder="0"
         allow="autoplay; fullscreen; picture-in-picture"
         sandbox="allow-scripts allow-same-origin allow-popups"
-        controlslist="nodownload"
+        controlsList="nodownload"
         allowFullScreen
         title={slides[currentIndex]?.title}>
 
