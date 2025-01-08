@@ -62,7 +62,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   try {
-    const response = await axios.post("lwfs-app-server-production.up.railway.app/auth/signin", { email });
+    const response = await axios.post("https://lwfs-app-server-production.up.railway.app/auth/signin", { email });
 
     const { token } = response.data;
 
@@ -86,7 +86,7 @@ const onSubmit = async (data) => {
   setError("");
   setSuccess("");
 try {
-  const response = await axios.post("lwfs-app-server-production.up.railway.app/auth/signup", data);
+  const response = await axios.post("https://lwfs-app-server-production.up.railway.app/auth/signup", data);
   setSuccess(response.data.message);
   setIsLogIn(true);
   setIRegister(false);
