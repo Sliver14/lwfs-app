@@ -9,13 +9,48 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 function Modal() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(null);
   const [isLogIn, setIsLogIn] = useState(true);
   const [isRegister, setIRegister] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+
+  const initialValues = {
+    title: "",
+    firstName: "",
+    lastName: "",
+    countryCode: "+234", // Match the code in countryCodes
+    phoneNumber: "",
+    zone: "",
+    church: "",
+    // dateOfbirth: "",
+    email: "",
+  };
+
+  const validationSchema = Yup.object().shape({
+    title: Yup.string()
+    .required('Title is required') // Make the title mandatory
+    .oneOf(['Pastor', 'Deacon', 'Deaconess', 'Brother', 'Sister'], 'Invalid title selection'), // Restrict to valid options
+
+    firstName: Yup.string().required(""),
+
+    lastName: Yup.string().required(""),
+
+    countryCode: Yup.string().required(""),
+
+    phoneNumber: Yup.string().max(15, "Phone number must not exceed 15 digits")
+      .matches(/^\d+$/, "Phone number must contain only numbers")
+      .required("Phone number is required"),
+
+    zone: Yup.string().required(""),
+      
+    church: Yup.string().required(""),
+
+    email: Yup.string().required(""),
+    
+  });
 
   // const openModal = () => setIsModalOpen(true);
   const closeModal = () => {
@@ -27,7 +62,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   try {
-    const response = await axios.post("lwfs-app-server-production.up.railway.app/auth/signin", { email });
+    const response = await axios.post("http://localhost:3001/auth/signin", { email });
 
     const { token } = response.data;
 
@@ -47,6 +82,18 @@ const handleSubmit = async (e) => {
 };
 
 //handle signup
+const onSubmit = async (data) => {
+  setError("");
+  setSuccess("");
+try {
+  const response = await axios.post("http://localhost:3001/signup", data);
+  setSuccess(response.data.message);
+  alert("Sign-up successful!");
+} catch(err){
+  console.error("Sign-up error:", err);
+  setError(err.response?.data?.error || "Sign-up failed");
+}
+}
 
 
 // Function to check if a valid token exists
@@ -55,30 +102,31 @@ const checkAuthToken = async () => {
 
   if (!token) {
     setLoggedIn(false); // No token, user is not logged in
+    setIsModalOpen(true);
     return;
   }
 
-  try {
-    const response = await axios.post("lwfs-app-server-production.up.railway.app/auth/verify", { token });
+  // try {
+  //   const response = await axios.post("lwfs-app-server-production.up.railway.app/auth/verify", { token });
 
-    if (response.status === 200) {
-      setLoggedIn(true); // Valid token, user is logged in
-      setIsModalOpen(false);
-    } else {
-      setLoggedIn(false); // Invalid token
-      setIsModalOpen(true);
-    }
-  } catch (err) {
-    console.error("Token verification error:", err);
-    setLoggedIn(false); // Error in token validation
-    setIsModalOpen(true);
-  }
+  //   if (response.status === 200) {
+  //     setLoggedIn(true); // Valid token, user is logged in
+  //     setIsModalOpen(false);
+  //   } else {
+  //     setLoggedIn(false); // Invalid token
+  //     setIsModalOpen(true);
+  //   }
+  // } catch (err) {
+  //   console.error("Token verification error:", err);
+  //   setLoggedIn(false); // Error in token validation
+  //   setIsModalOpen(true);
+  // }
 };
 
 // Run token check on component mount
 useEffect(() => {
   checkAuthToken();
-}, []);
+}, [loggedIn]);
 
 
   return (
@@ -87,9 +135,9 @@ useEffect(() => {
            {isModalOpen && (
         <div className="flex flex-col fixed top-0 left-0 rigth-0 bottom-0 w-screen h-screen bg-lwfs4 justify-center items-center bg-opacity-80 z-50 transition duration-300 ">
           
-          <div className="relative flex w-11/12 h-3/6 transition duration-300 justify-center items-center bg-white rounded-lg ">
+          <div className="relative flex w-11/12 h-5/6 transition duration-300 justify-center items-center bg-white rounded-lg overflow-y-auto">
             
-          <div className='flex flex-col  justify-center items-center text-center w-10/12 h-4/6 ' >
+          <div className='flex flex-col  justify-center items-center text-center w-[100%] h-[100%]  ' >
             
             {isLogIn && <>
                 <div className='flex justify-center w-full items-center mb-10 transition duration-300' >
@@ -121,11 +169,77 @@ useEffect(() => {
                   </button>
               </div>
 
-              <div className='flex flex-col items-center' >
-                <input className='border border-lwfs3 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-lwfs2 text-2xl' type="text" placeholder='Email'/>
-                <button className='bg-lwfs2 w-32 mt-5 rounded-md text-white p-2 mb-5' >Create Account </button>
-                <span onClick={()=>{setIsLogIn(true),setIRegister(false)}}>Already Registered? <a className='text-lwfs2 cursor-pointer' >Sign in</a></span>
-              </div>
+              <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
+                <Form>
+                  <div>
+                  <label htmlFor="firstName">First Name </label>
+                  <ErrorMessage name="firstName" component="span" />
+                  </div>
+                  <Field id="firstName" name="firstName" />
+                  
+                  <div>
+                  <label htmlFor="lastName">Last Name </label>
+                  <ErrorMessage name="lastName" component="span" />
+                  </div>
+                  <Field id="lastName" name="lastName" />
+
+                  <div>
+                  <label htmlFor="countryCode">Country Code </label>
+                  <ErrorMessage name="countryCode" component="span" />
+                  </div>
+                  <Field as="select" name="countryCode" id="countryCode">
+                    <option value="" disabled>
+                      Select your country code
+                    </option>
+                    {countryCodes.map((country) => (
+                      <option key={country.name} value={country.code}>
+                        {country.name} ({country.code})
+                      </option>
+                    ))}
+                  </Field>
+                  <div>
+
+                  <label htmlFor="phoneNumber">Phone Number </label>
+                  <ErrorMessage name="phoneNumber" component="span" />
+                  </div>
+                  <Field id="phoneNumber" name="phoneNumber" />
+
+                  <div>
+                  <label htmlFor="zone">Zone </label>
+                  <ErrorMessage name="zone" component="span" />
+                  </div>
+                  <Field as="select" name="zone" id="zone">
+                    <option value="" disabled>
+                      Select your zone
+                    </option>
+                    {zones.map((zone) => (
+                      <option key={zone} value={zone}>
+                        {zone}
+                      </option>
+                    ))}
+                  </Field>
+                  
+                  <div>
+                  <label htmlFor="church">Church </label>
+                  <ErrorMessage name="church" component="span" />
+                  </div>
+                  <Field id="church" name="church" />
+
+                  <div>
+                  <label htmlFor="email">Email </label>
+                  <ErrorMessage name="email" component="span" />
+                  </div>
+                  <Field id="email" name="email" />
+
+                  {error && <p style={{ color: "red", alignSelf: "center" }}>{error}</p>}
+                	{success && <p style={{ color: "green", alignSelf: "center" }}>{success}</p>}
+
+                  <button type="submit" className='bg-lwfs2 w-32 mt-5 rounded-md text-white p-2 mb-5'>Register</button>
+                  
+                  <span onClick={()=>{setIsLogIn(true),setIRegister(false)}}>Already registered? <a className='text-lwfs2 cursor-pointer' >Login</a></span>
+                </Form>
+                
+              </Formik>
             </>  
             }
 

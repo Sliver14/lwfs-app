@@ -10,7 +10,7 @@ function LiveTv() {
         frameBorder="0"
         allow="autoplay; fullscreen; picture-in-picture"
         sandbox="allow-scripts allow-same-origin allow-popups"
-        controlslist="nodownload"
+        controlsList="nodownload"
         allowFullScreen
         >
 
