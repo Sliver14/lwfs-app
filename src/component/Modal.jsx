@@ -2,6 +2,11 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { IoCloseSharp } from "react-icons/io5";
 import Cookies from "js-cookie";
+import countryCodes from "../utils/countryCodes.js";
+import zones from "../utils/zones.js";
+import axios from "axios";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 function Modal() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,84 +15,71 @@ function Modal() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
-
-  // useEffect(() => {
-  //   if(!loggedIn){
-  //     setIsModalOpen(true);
-  //   }
-  // }, [loggedIn]);
-
-  useEffect(() => {
-    const checkToken = async () => {
-      const token = Cookies.get("authToken"); // Retrieve the token from cookies
-      if(token){
-        setLoggedIn(true);
-        setIsModalOpen(false);
-      } else{
-        setLoggedIn(false);
-        setIsModalOpen(true);
-      }
-      // if (token) {
-      //   try {
-      //     // Optional: Validate the token with the backend
-      //     const response = await fetch("http://localhost:3001/auth/validate-token", {
-      //       method: "POST",
-      //       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
-      //     });
-
-      //     if (response.ok) {
-      //       setLoggedIn(true); // Token is valid, set loggedIn to true
-      //       setIsModalOpen(false);
-      //     } else {
-      //       setLoggedIn(false); // Token invalid, set loggedIn to false
-      //       setIsModalOpen(true);
-      //     }
-      //   } catch (error) {
-      //     console.error("Error validating token:", error);
-      //     setLoggedIn(false); // Set loggedIn to false in case of error
-      //     setIsModalOpen(true);
-      //   }
-      // } else {
-      //   setLoggedIn(false); // No token found, set loggedIn to false
-      //   setIsModalOpen(true);
-      // }
-    };
-
-    checkToken(); // Call the function on component mount
-  }, [loggedIn]); // Empty dependency array ensures this runs only once
+  const [success, setSuccess] = useState(null);
 
   // const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
+  }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent page reload on form submission
+// Function to handle sign-in
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      // Make POST request to the backend
-      const response = await fetch("lwfs-app-server-production.up.railway.app/auth/signin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
+  try {
+    const response = await axios.post("lwfs-app-server-production.up.railway.app/auth/signin", { email });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Sign-in failed");
-      }
+    const { token } = response.data;
 
-      const { token } = await response.json(); // Extract token from response
+    // Save token to cookies
+    Cookies.set("authToken", token, { expires: 30, secure: true, sameSite: "strict" });
 
-      // Save token to cookies
-      Cookies.set("authToken", token, { expires: 1 / 24, secure: true, sameSite: "strict" });
+    setSuccess(response.data.message);
+    setLoggedIn(true); // Set loggedIn to true
+    setIsModalOpen(false);
+    setError(null); // Clear error
+    alert("Sign-in successful!");
+  } catch (err) {
+    console.error("Sign-in error:", err);
+    setError(err.response?.data?.error || "Sign-in failed");
+    setLoggedIn(false); // Set loggedIn to false on error
+  }
+};
 
-      alert("Sign-in successful!");
-      setEmail(""); // Clear email field
-      setError(null); // Clear errors
-    } catch (err) {
-      console.error("Sign-in error:", err);
-      setError(err.message); // Display error to the user
+//handle signup
+
+
+// Function to check if a valid token exists
+const checkAuthToken = async () => {
+  const token = Cookies.get("authToken");
+
+  if (!token) {
+    setLoggedIn(false); // No token, user is not logged in
+    return;
+  }
+
+  try {
+    const response = await axios.post("lwfs-app-server-production.up.railway.app/auth/verify", { token });
+
+    if (response.status === 200) {
+      setLoggedIn(true); // Valid token, user is logged in
+      setIsModalOpen(false);
+    } else {
+      setLoggedIn(false); // Invalid token
+      setIsModalOpen(true);
     }
-  };
+  } catch (err) {
+    console.error("Token verification error:", err);
+    setLoggedIn(false); // Error in token validation
+    setIsModalOpen(true);
+  }
+};
+
+// Run token check on component mount
+useEffect(() => {
+  checkAuthToken();
+}, []);
+
 
   return (
     <div>
@@ -111,6 +103,8 @@ function Modal() {
               <div className='flex flex-col items-center' >
                 <input onChange={(event) => setEmail(event.target.value)} className='border border-lwfs3 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-lwfs2 text-2xl' type="text" placeholder='Email'/>
                 <button onClick={handleSubmit} className='bg-lwfs2 w-32 mt-5 rounded-md text-white p-2 mb-5' >Sign In </button>
+                {error && <p style={{ color: "red" }}>{error}</p>}
+                {success && <p style={{ color: "green" }}>{success}</p>}
                 <span onClick={()=>{setIsLogIn(false),setIRegister(true)}}>New here? <a className='text-lwfs2 cursor-pointer' >Create Account</a></span>
               </div>
               
