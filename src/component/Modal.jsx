@@ -109,21 +109,21 @@ const checkAuthToken = async () => {
     return;
   }
 
-  // try {
-  //   const response = await axios.post("lwfs-app-server-production.up.railway.app/auth/verify", { token });
+  try {
+    const response = await axios.post("https://lwfs-app-server-production.up.railway.app/auth/verify", { token });
 
-  //   if (response.status === 200) {
-  //     setLoggedIn(true); // Valid token, user is logged in
-  //     setIsModalOpen(false);
-  //   } else {
-  //     setLoggedIn(false); // Invalid token
-  //     setIsModalOpen(true);
-  //   }
-  // } catch (err) {
-  //   console.error("Token verification error:", err);
-  //   setLoggedIn(false); // Error in token validation
-  //   setIsModalOpen(true);
-  // }
+    if (response.status === 200) {
+      setLoggedIn(true); // Valid token, user is logged in
+      setIsModalOpen(false);
+    } else {
+      setLoggedIn(false); // Invalid token
+      setIsModalOpen(true);
+    }
+  } catch (err) {
+    console.error("Token verification error:", err);
+    setLoggedIn(false); // Error in token validation
+    setIsModalOpen(true);
+  }
 };
 
 // Run token check on component mount
