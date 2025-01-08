@@ -9,7 +9,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 function Modal() {
-    const [isModalOpen, setIsModalOpen] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(null);
   const [isLogIn, setIsLogIn] = useState(true);
   const [isRegister, setIRegister] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -18,7 +18,7 @@ function Modal() {
   const [success, setSuccess] = useState(null);
 
   const initialValues = {
-    title: "",
+    // title: "",
     firstName: "",
     lastName: "",
     countryCode: "+234", // Match the code in countryCodes
@@ -30,9 +30,9 @@ function Modal() {
   };
 
   const validationSchema = Yup.object().shape({
-    title: Yup.string()
-    .required('Title is required') // Make the title mandatory
-    .oneOf(['Pastor', 'Deacon', 'Deaconess', 'Brother', 'Sister'], 'Invalid title selection'), // Restrict to valid options
+    // title: Yup.string()
+    // .required('Title is required') // Make the title mandatory
+    // .oneOf(['Pastor', 'Deacon', 'Deaconess', 'Brother', 'Sister'], 'Invalid title selection'), // Restrict to valid options
 
     firstName: Yup.string().required(""),
 
@@ -62,7 +62,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   try {
-    const response = await axios.post("http://localhost:3001/auth/signin", { email });
+    const response = await axios.post("lwfs-app-server-production.up.railway.app/auth/signin", { email });
 
     const { token } = response.data;
 
@@ -86,12 +86,15 @@ const onSubmit = async (data) => {
   setError("");
   setSuccess("");
 try {
-  const response = await axios.post("http://localhost:3001/signup", data);
+  const response = await axios.post("lwfs-app-server-production.up.railway.app/auth/signup", data);
   setSuccess(response.data.message);
+  setIsLogIn(true);
+  setIRegister(false);
   alert("Sign-up successful!");
 } catch(err){
   console.error("Sign-up error:", err);
   setError(err.response?.data?.error || "Sign-up failed");
+
 }
 }
 
@@ -168,7 +171,7 @@ useEffect(() => {
                     <IoCloseSharp className='absolute font-bold text-2xl top-5 right-5' />
                   </button>
               </div>
-
+              <div>
               <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
                 <Form>
                   <div>
@@ -240,6 +243,8 @@ useEffect(() => {
                 </Form>
                 
               </Formik>
+              </div>
+              
             </>  
             }
 
