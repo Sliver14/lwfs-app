@@ -16,6 +16,7 @@ function Modal() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  
 
   const initialValues = {
     // title: "",

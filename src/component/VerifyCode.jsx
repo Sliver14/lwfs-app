@@ -11,7 +11,7 @@ function VerifyCode() {
 
   const handleSendCode = async () => {
     try {
-      await axios.post("http://localhost:3001/auth/send-code", { email });
+      await axios.post("https://lwfs-app-server-production.up.railway.app/auth/send-code", { email });
       setStep(2);
       alert("Verification code sent to your email.");
     } catch (err) {
@@ -22,7 +22,7 @@ function VerifyCode() {
 
   const handleVerifyCode = async () => {
     try {
-      const res = await axios.post("http://localhost:3001/auth/verify-code", { email, code });
+      const res = await axios.post("https://lwfs-app-server-production.up.railway.app/auth/verify-code", { email, code });
       alert(res.data.message);
       // Proceed with signup
     } catch (err) {
