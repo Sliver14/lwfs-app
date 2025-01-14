@@ -1,64 +1,52 @@
-import React from 'react'
-import axios from 'axios';
-import { useState, useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react'
+import axios from "axios";
 
 function VerifyCode() {
+    const [email, setEmail] = useState("");
+    const [code, setCode] = useState("");
+    const [step, setStep] = useState(1);
 
-  const [email, setEmail] = useState("");
-  const [code, setCode] = useState("");
-  const [step, setStep] = useState(1); // Step 1: Enter email, Step 2: Enter code
+    const signin = async (e) => {
+        e.preventDefault();
 
-  const handleSendCode = async () => {
-    try {
-      await axios.post("https://lwfs-app-server-production.up.railway.app/auth/send-code", { email });
-      setStep(2);
-      alert("Verification code sent to your email.");
-    } catch (err) {
-      console.error(err);
-      alert("Failed to send verification code.");
+        try{
+            const response = await axios.post("http://localhost:3001/auth/signin", { email} );
+            setStep(2)
+        } catch(error){
+            
+        }
     }
-  };
 
-  const handleVerifyCode = async () => {
-    try {
-      const res = await axios.post("https://lwfs-app-server-production.up.railway.app/auth/verify-code", { email, code });
-      alert(res.data.message);
-      // Proceed with signup
-    } catch (err) {
-      console.error(err);
-      alert("Invalid or expired code.");
+const verifySignin = async (e) => {
+        e.preventDefault();
+
+        try{
+            const response = await axios.post("http://localhost:3001/auth/verify-signin", { email, code} );
+            
+        } catch(error){
+
+        }
     }
-  };
 
   return (
-    <div className='flex flex-col mt-28'>
-      {step === 1 ? (
+    
+    <div className='m-28'>
+        {step === 1 &&
         <>
-          <h2>Enter Your Email</h2>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <button onClick={handleSendCode}>Send Code</button>
+            <input type='text' onChange={(e) => {setEmail(e.target.value)}}/>
+            <button onClick={signin}>Sign in</button>
         </>
-      ) : (
+        }
+        {step === 2 && 
         <>
-          <h2>Enter Verification Code</h2>
-          <input
-            type="text"
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-          />
-          <button onClick={handleVerifyCode}>Verify Code</button>
+            <input type='text' onChange={(e) => {setEmail(e.target.value)}}/>
+            <input type='text' onChange={(e) => {setCode(e.target.value)}}/>
+            <button onClick={verifySignin}>Verify</button>
         </>
-      )}
+        }
+      
     </div>
   )
 }
 
 export default VerifyCode
-
-
-
