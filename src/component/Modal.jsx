@@ -16,7 +16,9 @@ function Modal() {
   const [success, setSuccess] = useState(null);
   const [code, setCode] = useState("");
   const [step, setStep] = useState(1);
-  const PORT = "https://lwfs-app-server-production.up.railway.app";
+  // const PORT = "https://lwfs-app-server-production.up.railway.app";
+  const PORT = "http://localhost:3001";
+
   
 
   const initialValues = {
@@ -97,13 +99,12 @@ const onSubmit = async (data) => {
   setError("");
   setSuccess("");
 try {
-  const response = await axios.post(`${PORT}/auth/signup1` ,data);
+  const response = await axios.post(`${PORT}/auth/signup` ,data);
   setStep(4);
   setSuccess(response.data.message);
-} catch(err){
-  console.error("Sign-up error:", err);
+} catch(error){
+  console.error("Sign-up error:", error);
   setError(err.response?.data?.error || "Error verifiying code");
-
 }
 }
 
@@ -192,7 +193,7 @@ const closeModal = () => {
                 <button onClick={signinVerification}>Verify Code</button>
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 {success && <p style={{ color: "green" }}>{success}</p>}
-                <button onClick={handleSubmit}>Re-send code</button>
+                <button >Re-send code</button>
                 <buttton onClick={() => {setStep(1)}}>Signin</buttton>
                 <buttton onClick={() => {setStep(3)}}>Signup</buttton>
               </>
@@ -205,141 +206,146 @@ const closeModal = () => {
               </div>
               <div>
               <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-  <Form className="max-w-md mx-auto bg-white shadow-md rounded-lg p-6 space-y-4">
-    {/* First Name */}
-    <div className="flex flex-col">
-      <label htmlFor="firstName" className="text-gray-700 font-medium mb-1">
-        First Name
-      </label>
-      <Field
-        id="firstName"
-        name="firstName"
-        className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <ErrorMessage name="firstName" component="span" className="text-red-500 text-sm mt-1" />
-    </div>
+    
+                <Form className="max-w-md mx-auto bg-white shadow-md rounded-lg p-6 space-y-4">
+                  {/* First Name */}
+                  <div className="flex flex-col">
+                    <label htmlFor="firstName" className="text-gray-700 font-medium mb-1">
+                      First Name
+                    </label>
+                    <Field
+                      id="firstName"
+                      name="firstName"
+                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <ErrorMessage name="firstName" component="span" className="text-red-500 text-sm mt-1" />
+                  </div>
 
-    {/* Last Name */}
-    <div className="flex flex-col">
-      <label htmlFor="lastName" className="text-gray-700 font-medium mb-1">
-        Last Name
-      </label>
-      <Field
-        id="lastName"
-        name="lastName"
-        className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <ErrorMessage name="lastName" component="span" className="text-red-500 text-sm mt-1" />
-    </div>
+                  {/* Last Name */}
+                  <div className="flex flex-col">
+                    <label htmlFor="lastName" className="text-gray-700 font-medium mb-1">
+                      Last Name
+                    </label>
+                    <Field
+                      id="lastName"
+                      name="lastName"
+                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <ErrorMessage name="lastName" component="span" className="text-red-500 text-sm mt-1" />
+                  </div>
 
-    {/* Country Code */}
-    <div className="flex flex-col">
-      <label htmlFor="countryCode" className="text-gray-700 font-medium mb-1">
-        Country Code
-      </label>
-      <Field
-        as="select"
-        name="countryCode"
-        id="countryCode"
-        className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
-        <option value="" disabled>
-          Select your country code
-        </option>
-        {countryCodes.map((country) => (
-          <option key={country.name} value={country.code}>
-            {country.name} ({country.code})
-          </option>
-        ))}
-      </Field>
-      <ErrorMessage name="countryCode" component="span" className="text-red-500 text-sm mt-1" />
-    </div>
+                  {/* Country Code */}
+                  <div className="flex flex-col">
+                    <label htmlFor="countryCode" className="text-gray-700 font-medium mb-1">
+                      Country Code
+                    </label>
+                    <Field
+                      as="select"
+                      name="countryCode"
+                      id="countryCode"
+                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="" disabled>
+                        Select your country code
+                      </option>
+                      {countryCodes.map((country) => (
+                        <option key={country.name} value={country.code}>
+                          {country.name} ({country.code})
+                        </option>
+                      ))}
+                    </Field>
+                    <ErrorMessage name="countryCode" component="span" className="text-red-500 text-sm mt-1" />
+                  </div>
 
-    {/* Phone Number */}
-    <div className="flex flex-col">
-      <label htmlFor="phoneNumber" className="text-gray-700 font-medium mb-1">
-        Phone Number
-      </label>
-      <Field
-        id="phoneNumber"
-        name="phoneNumber"
-        className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <ErrorMessage name="phoneNumber" component="span" className="text-red-500 text-sm mt-1" />
-    </div>
+                  {/* Phone Number */}
+                  <div className="flex flex-col">
+                    <label htmlFor="phoneNumber" className="text-gray-700 font-medium mb-1">
+                      Phone Number
+                    </label>
+                    <Field
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <ErrorMessage name="phoneNumber" component="span" className="text-red-500 text-sm mt-1" />
+                  </div>
 
-    {/* Zone */}
-    <div className="flex flex-col">
-      <label htmlFor="zone" className="text-gray-700 font-medium mb-1">
-        Zone
-      </label>
-      <Field
-        as="select"
-        name="zone"
-        id="zone"
-        className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      >
-        <option value="" disabled>
-          Select your zone
-        </option>
-        {zones.map((zone) => (
-          <option key={zone} value={zone}>
-            {zone}
-          </option>
-        ))}
-      </Field>
-      <ErrorMessage name="zone" component="span" className="text-red-500 text-sm mt-1" />
-    </div>
+                  {/* Zone */}
+                  <div className="flex flex-col">
+                    <label htmlFor="zone" className="text-gray-700 font-medium mb-1">
+                      Zone
+                    </label>
+                    <Field
+                      as="select"
+                      name="zone"
+                      id="zone"
+                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                      <option value="" disabled>
+                        Select your zone
+                      </option>
+                      {zones.map((zone) => (
+                        <option key={zone} value={zone}>
+                          {zone}
+                        </option>
+                      ))}
+                    </Field>
+                    <ErrorMessage name="zone" component="span" className="text-red-500 text-sm mt-1" />
+                  </div>
 
-    {/* Church */}
-    <div className="flex flex-col">
-      <label htmlFor="church" className="text-gray-700 font-medium mb-1">
-        Church
-      </label>
-      <Field
-        id="church"
-        name="church"
-        className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <ErrorMessage name="church" component="span" className="text-red-500 text-sm mt-1" />
-    </div>
+                  {/* Church */}
+                  <div className="flex flex-col">
+                    <label htmlFor="church" className="text-gray-700 font-medium mb-1">
+                      Church
+                    </label>
+                    <Field
+                      id="church"
+                      name="church"
+                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <ErrorMessage name="church" component="span" className="text-red-500 text-sm mt-1" />
+                  </div>
 
-    {/* Email */}
-    <div className="flex flex-col">
-      <label htmlFor="email" className="text-gray-700 font-medium mb-1">
-        Email
-      </label>
-      <Field
-        id="email"
-        name="email"
-        className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      <ErrorMessage name="email" component="span" className="text-red-500 text-sm mt-1" />
-    </div>
+                  {/* Email */}
+                  <div className="flex flex-col">
+                    <label htmlFor="email" className="text-gray-700 font-medium mb-1">
+                      Email
+                    </label>
+                    <Field
+                      id="email"
+                      name="email"
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
+                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    />
+                    <ErrorMessage name="email" component="span" className="text-red-500 text-sm mt-1" />
+                  </div>
 
-    {/* Error & Success Messages */}
-    {error && <p className="text-red-500 text-center">{error}</p>}
-    {success && <p className="text-green-500 text-center">{success}</p>}
+                  {/* Error & Success Messages */}
+                  {error && <p className="text-red-500 text-center">{error}</p>}
+                  {success && <p className="text-green-500 text-center">{success}</p>}
 
-    {/* Submit Button */}
-    <button
-      type="submit"
-      className="bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md p-2 mt-4 w-full"
-    >
-      Register
-    </button>
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md p-2 mt-4 w-full"
+                  >
+                    Register
+                  </button>
 
-    {/* Already Registered */}
-    <span className="block text-center mt-2 text-sm">
-      Already registered?{" "}
-      <a
-        onClick={() => setStep(1)}
-        className="text-blue-500 hover:underline cursor-pointer"
-      >
-        Login
-      </a>
-    </span>
-  </Form>
+                  {/* Already Registered */}
+                  <span className="block text-center mt-2 text-sm">
+                    Already registered?{" "}
+                    <a
+                      onClick={() => setStep(1)}
+                      className="text-blue-500 hover:underline cursor-pointer"
+                    >
+                      Login
+                    </a>
+                  </span>
+                </Form>
+          
               </Formik>
 
               </div>
@@ -349,7 +355,6 @@ const closeModal = () => {
               { step === 4 && 
               <>
                 <h2>Enter Verification Code</h2>
-                <input type='email' onChange={(e) => setEmail(e.target.value)} />
                 <input
                   type="text"
                   onChange={(e) => setCode(e.target.value)}
@@ -357,6 +362,9 @@ const closeModal = () => {
                 <button onClick={signupVerification}>Verify Code</button>
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 {success && <p style={{ color: "green" }}>{success}</p>}
+                <button >Re-send code</button>
+                <buttton onClick={() => setStep(1)}>Signin</buttton>
+                <buttton onClick={() => setStep(3)}>Signup</buttton>
               </>
               }
             
