@@ -52,7 +52,7 @@ function Modal() {
       
     church: Yup.string().required(""),
 
-    email: Yup.string().required(""),
+    email: Yup.string().email("Invalid email address").required("Email is required"),
     
   });
 
@@ -115,6 +115,7 @@ const signupVerification = async (e) => {
   try{
     const response = await axios.post(`${PORT}/auth/verify-signup`, { email, code });
     setSuccess(response.data.message);
+    setStep(1);
   } catch (error){
     setError(error.response?.data?.error || "Verification failed");
   }
@@ -206,7 +207,7 @@ const closeModal = () => {
               </div>
               <div>
               <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-    
+              {({ values, handleChange }) => (
                 <Form className="max-w-md mx-auto bg-white shadow-md rounded-lg p-6 space-y-4">
                   {/* First Name */}
                   <div className="flex flex-col">
@@ -311,12 +312,18 @@ const closeModal = () => {
                     <label htmlFor="email" className="text-gray-700 font-medium mb-1">
                       Email
                     </label>
-                    <Field
+                    <input
                       id="email"
                       name="email"
+                      type="text"
+                      value={values.email}
+                      // Update Formik's state and external `setEmail`
                       onChange={(e) => {
-                        setEmail(e.target.value);
+                        handleChange(e);
+                        setEmail(e.target.value); // Update external state
+                        formik.setFieldValue("email", e.target.value); // Update Formik state
                       }}
+                      
                       className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <ErrorMessage name="email" component="span" className="text-red-500 text-sm mt-1" />
@@ -333,9 +340,12 @@ const closeModal = () => {
                   >
                     Register
                   </button>
+                </Form>
+              )}
+              </Formik>
 
-                  {/* Already Registered */}
-                  <span className="block text-center mt-2 text-sm">
+              {/* Already Registered */}
+              <span className="block text-center mt-2 text-sm">
                     Already registered?{" "}
                     <a
                       onClick={() => setStep(1)}
@@ -344,9 +354,6 @@ const closeModal = () => {
                       Login
                     </a>
                   </span>
-                </Form>
-          
-              </Formik>
 
               </div>
                 </>
