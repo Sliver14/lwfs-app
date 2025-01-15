@@ -16,6 +16,7 @@ function Modal() {
   const [success, setSuccess] = useState(null);
   const [code, setCode] = useState("");
   const [step, setStep] = useState(1);
+  const PORT = "https://lwfs-app-server-production.up.railway.app/";
   
 
   const initialValues = {
@@ -58,7 +59,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
 
   try {
-    const response = await axios.post("http://localhost:3001/auth/signin", { email });
+    const response = await axios.post(`${PORT}/auth/signin`, { email });
 
     setSuccess(response.data.message);
     setLoggedIn(true); // Set loggedIn to true
@@ -77,7 +78,7 @@ const signinVerification = async (e) => {
   e.preventDefault();
   
   try{
-    const response = await axios.post("http://localhost:3001/auth/verify-signin", { email, code });
+    const response = await axios.post(`${PORT}/auth/verify-signin`, { email, code });
 
     const { token } = response.data;
 
@@ -96,7 +97,7 @@ const onSubmit = async (data) => {
   setError("");
   setSuccess("");
 try {
-  const response = await axios.post("http://localhost:3001/auth/signup", data);
+  const response = await axios.post(`${PORT}/auth/signup1` ,data);
   setStep(4);
   setSuccess(response.data.message);
 } catch(err){
@@ -111,7 +112,7 @@ const signupVerification = async (e) => {
   e.preventDefault();
   
   try{
-    const response = await axios.post("http://localhost:3001/auth/verify-signup", { email, code });
+    const response = await axios.post(`${PORT}/auth/verify-signup`, { email, code });
     setSuccess(response.data.message);
   } catch (error){
     setError(error.response?.data?.error || "Verification failed");
@@ -130,7 +131,7 @@ const checkAuthToken = async () => {
   }
 
   try {
-    const response = await axios.post("http://localhost:3001/auth/verify", { token });
+    const response = await axios.post(`${PORT}/auth/verify`, { token });
 
     if (response.status === 200) {
       setLoggedIn(true); // Valid token, user is logged in
