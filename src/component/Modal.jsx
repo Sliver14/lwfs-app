@@ -16,7 +16,7 @@ function Modal() {
   const [success, setSuccess] = useState(null);
   const [code, setCode] = useState("");
   const [step, setStep] = useState(1);
-  const PORT = "https://lwfs-app-server-production.up.railway.app/";
+  const PORT = "https://lwfs-app-server-production.up.railway.app";
   
 
   const initialValues = {
