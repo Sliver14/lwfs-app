@@ -10,7 +10,7 @@ function Platforms() {
   setIsModalOpen(true);
   }
   return (
-    <div>
+    <div className='mt-32'>
       {/* Explore our platforms (slides) */}
       <button onClick={logout}>Logout</button>
     </div>
