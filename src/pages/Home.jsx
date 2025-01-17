@@ -35,7 +35,7 @@ function Home() {
         <div className="w-[95%] h-full shadow-lg ">
           <ImageSlider slides={slides} autoScroll={true} interval={5000} />
         </div>
-        <a className='absolute bottom-7 left-3 bg-lwfs2 text-lwfs3 px-5 py-2 mt-2 hover:font-bold hover:shadow-sm hover:shadow-black rounded-md cursor-pointer' href="http://lwfoundationschool.org/datacenter/registration/ " target="_blank">Click to Register</a>
+        <a className='absolute bottom-7 left-3 bg-lwfs2 text-lwfs3 px-5 py-2 mt-2 hover:font-bold hover:shadow-sm hover:shadow-black rounded-md cursor-pointer' href="#" target="_blank">Click to Register</a>
       </div>
 
       {/* Testimony slider*/}

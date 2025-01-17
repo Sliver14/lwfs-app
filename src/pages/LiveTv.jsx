@@ -7,12 +7,12 @@ function LiveTv() {
       <div className='w-screen h-[38vh]'>
       <video src="https://res.cloudinary.com/dfi8bpolg/video/upload/v1736329276/samples/dance-2.mp4"
       className="w-full h-full object-contain " 
+        controls
         frameBorder="0"
-        allow="autoplay; fullscreen; picture-in-picture"
         sandbox="allow-scripts allow-same-origin allow-popups"
         controlsList="nodownload"
         allowFullScreen
-        >
+      >
 
       </video>
       </div>

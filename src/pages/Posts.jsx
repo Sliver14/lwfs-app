@@ -6,11 +6,14 @@ import axios from "axios";
 
 function Posts() {
   const [listOfPosts, setListOfPosts] = useState([]);
+  const PORT = "https://lwfs-app-server-production.up.railway.app";
+  // const PORT = "http://localhost:3001";
 
   useEffect(() => {
+    
     const fetchData = async () => {
       try{
-        const response = await axios.get("http://localhost:3001/posts/postpage");
+        const response = await axios.get(`${PORT}/posts/postpage`);
         //  setListOfPosts(response.data);
         setListOfPosts(response.data);
       } catch(error){
@@ -31,11 +34,11 @@ function Posts() {
           <>
           <div key={post.id} className='flex flex-col pl-3 m-1 border-2 rounded-md border-gray-100  hover:border-[0.8px] hover:border-lwfs2 hover:rounded-lg'>
             <div className='flex flex-col h-auto w-[98%] mt-3' >
-            <img className='flex h-full w-full rounded-lg ' src={post.postPhoto} alt=''/>
+            <img className='flex h-full w-full rounded-lg ' src={post.postPhoto}  alt=''/>
           </div>
           <div className='flex gap-5 my-3'>
             <button className='bg-red-600 text-white text-sm px-2 py-[3px] rounded-sm'>Blog</button>
-            <h1 className='flex items-center gap-1'><IoTimeOutline /> 2025-01-06</h1>
+            <h1 className='flex items-center gap-1'><IoTimeOutline />{post.createdAt}</h1>
             <h1 className='flex items-center gap-1'><GrView /> 293</h1>
           </div>
 

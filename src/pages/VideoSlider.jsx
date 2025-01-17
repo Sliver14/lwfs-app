@@ -55,6 +55,8 @@ function VideoSlider({ slides, autoScroll = true, interval = 3000 }) {
         autoPlay
         muted
         loop
+        controls
+        controlsList="nodownload"
         src={slides[currentIndex]?.url}
       />
 
