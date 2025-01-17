@@ -9,7 +9,8 @@ import Footer from './component/Footer';
 import PageNotFound from './component/PageNotFound';
 import Posts from './pages/Posts';
 import Platforms from './pages/Platforms';
-import VerifyCode from './component/VerifyCode';
+// import VerifyCode from './component/VerifyCode';
+import PostPage from './pages/PostPage'
 
 
 
@@ -24,8 +25,10 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/posts" element={<Posts />} />
         <Route path="/platforms" element={<Platforms />} />
-        <Route path="/verifycode" element={<VerifyCode />} />
+        <Route path="/postpage" element={<PostPage/>}/>
+        {/* <Route path="/verifycode" element={<VerifyCode />} /> */}
         <Route path="*" element={<PageNotFound />} />
+        
 
       </Routes>
       {/* <Footer /> */}

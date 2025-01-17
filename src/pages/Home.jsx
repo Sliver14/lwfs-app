@@ -12,13 +12,13 @@ function Home() {
   const navigate = useNavigate();
   
   const slides = [
-    // {url: "/Jan-comm.jpg", title: "Jan-comm"},
-    {url: "/16th-summit.jpeg", title: "16th-summit"},
-    // {url: "/logo.png", title: "logo"},
+    {url: "https://res.cloudinary.com/dfi8bpolg/image/upload/v1736329276/samples/two-ladies.jpg", title: "Jan-comm"},
+    {url: "https://res.cloudinary.com/dfi8bpolg/image/upload/v1736329281/cld-sample-5.jpg", title: "16th-summit"},
+    {url: "https://res.cloudinary.com/dfi8bpolg/image/upload/v1736329279/samples/smile.jpg", title: "logo"},
   ];
   
   const videoSlides = [
-    { url: "https://embed.ceflix.org/video/1881644"
+    { url: "https://res.cloudinary.com/dfi8bpolg/video/upload/v1736329275/samples/cld-sample-video.mp4"
       , title: "video1" },
     
   ];

@@ -5,7 +5,7 @@ function LiveTv() {
   return (
     <div className='flex flex-col pt-16'>
       <div className='w-screen h-[38vh]'>
-      <iframe src="https://embed.ceflix.org/video/1881625"
+      <video src="https://res.cloudinary.com/dfi8bpolg/video/upload/v1736329276/samples/dance-2.mp4"
       className="w-full h-full object-contain " 
         frameBorder="0"
         allow="autoplay; fullscreen; picture-in-picture"
@@ -14,7 +14,7 @@ function LiveTv() {
         allowFullScreen
         >
 
-      </iframe>
+      </video>
       </div>
 
       <div className='flex flex-col mt-5 bg-gray-400 pb-5 px-5'>

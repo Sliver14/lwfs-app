@@ -50,15 +50,15 @@ function VideoSlider({ slides, autoScroll = true, interval = 3000 }) {
       // {...swipeHandlers}
     >
       {/* Video Slide */}
-      {/* <video
+      <video
         className="w-full h-full object-cover transition-all duration-500"
         autoPlay
         muted
         loop
         src={slides[currentIndex]?.url}
-      /> */}
+      />
 
-      <iframe src={slides[currentIndex]?.url}
+      {/* <iframe src={slides[currentIndex]?.url}
       className="w-full h-full object-contain" 
         frameBorder="0"
         allow="autoplay; fullscreen; picture-in-picture"
@@ -67,7 +67,7 @@ function VideoSlider({ slides, autoScroll = true, interval = 3000 }) {
         allowFullScreen
         title={slides[currentIndex]?.title}>
 
-      </iframe>
+      </iframe> */}
 
   
 

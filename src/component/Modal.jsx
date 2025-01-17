@@ -16,8 +16,8 @@ function Modal() {
   const [success, setSuccess] = useState(null);
   const [code, setCode] = useState("");
   const [step, setStep] = useState(1);
-  const PORT = "https://lwfs-app-server-production.up.railway.app";
-  // const PORT = "http://localhost:3001";
+  // const PORT = "https://lwfs-app-server-production.up.railway.app";
+  const PORT = "http://localhost:3001";
 
   
 
@@ -62,16 +62,15 @@ const handleSubmit = async (e) => {
 
   try {
     const response = await axios.post(`${PORT}/auth/signin`, { email });
-
     setSuccess(response.data.message);
-    setLoggedIn(true); // Set loggedIn to true
+    // setLoggedIn(true); // Set loggedIn to true
     setStep(2);
     // setIsModalOpen(false);
     setError(null); // Clear error
-  } catch (err) {
-    console.error("Sign-in error:", err);
-    setError(err.response?.data?.error || "Sign-in failed");
-    setLoggedIn(false); // Set loggedIn to false on error
+  } catch (error) {
+    console.error("Sign-in error:", error);
+    setError(error.response?.data?.error || "Sign-in failed");
+    // setLoggedIn(false); // Set loggedIn to false on error
   }
 };
 
@@ -89,6 +88,7 @@ const signinVerification = async (e) => {
 
     setSuccess(response.data.message);
     setIsModalOpen(false);
+    setLoggedIn(true);
   } catch (error){
     setError(error.response?.data?.error || "Verification failed");
   }
