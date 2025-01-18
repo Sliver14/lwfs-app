@@ -22,6 +22,7 @@ function Posts() {
     }
     fetchData();
   }, []);
+
   return (
     <div className='mt-12'>
       {/* LWFS News (blog) e.g graduation highlights */}
@@ -50,7 +51,7 @@ function Posts() {
           </div>
           </>
             
-          ))};
+          ))}
           
         </div>  
 
