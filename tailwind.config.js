@@ -10,11 +10,12 @@ export default {
     extend: {
       colors:{
         //Add custom colors here
-        lwfs1: "#011638",
-        lwfs2: "#0d21a1",
-        lwfs3: "#eef0f2",
-        lwfs4: "#141414",
-        lwfs5: "#eec643",
+        lw_dark_blue: "#070432",
+        lw_blue: "#0F0A59",
+        lw_yellow: "#FFC300",
+        lw_red: "#FF0004",
+        lw_green: "#009D34",
+        lw_gray: "#D9D9D9",
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui'], // Add Inter as the default sans-serif

@@ -6,6 +6,7 @@ import LiveTv from "./pages/LiveTv";
 import Navbar from './component/Navbar';
 import Privacy from "./pages/Privacy";
 import Footer from './component/Footer';
+import LogoSlider from './pages/LogoSlider';
 import PageNotFound from './component/PageNotFound';
 import Posts from './pages/Posts';
 import Platforms from './pages/Platforms';
@@ -25,13 +26,15 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/posts" element={<Posts />} />
         <Route path="/platforms" element={<Platforms />} />
+        <Route path="/footer" element={<Footer />} />
         <Route path="/postpage" element={<PostPage/>}/>
+        <Route path="/logoslider" element={<LogoSlider/>}/>
         {/* <Route path="/verifycode" element={<VerifyCode />} /> */}
         <Route path="*" element={<PageNotFound />} />
         
 
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </Router>
   )
 }

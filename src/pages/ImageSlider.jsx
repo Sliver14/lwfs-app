@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 
-function ImageSlider({ slides, autoScroll = true, interval = 3000 }) {
+function ImageSlider({ slides, autoScroll = true, interval = 20000 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Auto-scroll functionality
@@ -40,24 +40,24 @@ function ImageSlider({ slides, autoScroll = true, interval = 3000 }) {
 
   return (
     <div
-      className="relative w-full h-full overflow-hidden rounded-lg"
+      className="relative w-full h-full overflow-hidden"
       {...swipeHandlers}
     >
       {/* Slide */}
       <div
-        className="w-full h-full bg-cover bg-center transition-all duration-500 object-cover"
+        className="w-full h-full bg-cover bg-[20%_25%] transition-all duration-1000 object-cover"
         style={{ backgroundImage: `url(${slides[currentIndex]?.url})` }}
       ></div>
 
       {/* Navigation Buttons */}
       <button
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-800 text-3xl p-2 rounded-full opacity-70 hover:opacity-100 transition-opacity duration-300"
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 text-white text-xl p-2 bg-gray-500 rounded-full opacity-70 hover:bg-gray-900 transition-opacity duration-300"
         onClick={prevSlide}
       >
         &#10094;
       </button>
       <button
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-800 text-3xl p-2 rounded-full opacity-70 hover:opacity-100 transition-opacity duration-300"
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 text-white text-xl p-2 bg-gray-500 rounded-full opacity-70 hover:bg-gray-900 transition-opacity duration-300"
         onClick={nextSlide}
       >
         &#10095;
@@ -83,12 +83,5 @@ function ImageSlider({ slides, autoScroll = true, interval = 3000 }) {
 
 export default ImageSlider;
 
-
-
-// import { useSwipeable } from "react-swipeable";
-  // const swipeHandlers = useSwipeable({
-  //   onSwipedLeft: () => nextSlide(),
-  //   onSwipedRight: () => prevSlide(),
-  // });
 
   
