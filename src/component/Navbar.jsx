@@ -2,18 +2,32 @@ import React from 'react'
 // import "../style/Navbar.css";
 import { useState, useEffect } from 'react';
 import { useNavigate, Link, NavLink } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { GrMenu } from "react-icons/gr";
 import { IoMdClose } from "react-icons/io";
 import logo from "../images/LWFS_LOGO.png";
 import { FaAngleDown } from "react-icons/fa6";
 
 function Navbar() {
+  const location =useLocation();
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const activeClass = "flex px-3 py-2 rounded-lg font-medium bg-opacity-90 transform duration-300 bg-lw_red text-white";
     const inactiveClass = "flex text-black px-3 py-2 rounded-lg hover:bg-[#7B7777] hover:bg-opacity-25 hover:text-black transform duration-300";
-   
+
+    const logout = () => {
+        // Remove the authToken cookie
+      Cookies.remove("authToken");
+    
+      // Optionally, reset any state related to authentication
+      setIsModalOpen(true);
+      }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location])
+
     const toggleSidebar = () => {
       setIsOpen(!isOpen);
       
@@ -51,7 +65,7 @@ function Navbar() {
               className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
               onClick={() => navigate("/live-tv")}
             >
-              Live-TV
+              Live - TV
             </NavLink>
 
             {/* Dropdown for Platforms */}
@@ -64,24 +78,30 @@ function Navbar() {
               </button>
               {dropdownOpen && (
                 <ul className="absolute left-0 bg-white shadow-lg mt-2 rounded-md w-48 py-2">
-                  <li
-                    className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                    onClick={() => {
-                      navigate('/online-class');
-                      setDropdownOpen(false);
-                    }}
-                  >
-                    Online Class
-                  </li>
-                  <li
-                    className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                    onClick={() => {
-                      navigate('/testimony-bank');
-                      setDropdownOpen(false);
-                    }}
-                  >
-                    Testimony Bank
-                  </li>
+                  <a href='https://online.lwfoundationschool.org/'>
+                    <li
+                      className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                      onClick={() => {
+                        navigate('/online-class');
+                        setDropdownOpen(false);
+                      }}
+                    >
+                      Online Class
+                    </li>
+                  </a>
+                  
+                  <a href='https://lwfoundationschool.org/testimonybank/'>
+                    <li
+                      className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                      onClick={() => {
+                        navigate('/testimony-bank');
+                        setDropdownOpen(false);
+                      }}
+                    >
+                      Testimony Bank
+                    </li>
+                  </a>
+                  
                   <li
                     className="px-4 py-2 cursor-pointer hover:bg-gray-100"
                     onClick={() => {
@@ -100,6 +120,13 @@ function Navbar() {
               onClick={() => navigate("/posts")}
             >
               Posts
+            </NavLink>
+
+            <NavLink to="/contact"
+              className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
+              onClick={() => navigate("/contact")}
+            >
+              Contact
             </NavLink>
             
         </div>
@@ -126,23 +153,70 @@ function Navbar() {
     </div>
 
       <div className='flex flex-col h-screen' >
-        <ul className='px-5 space-y-2 text-lg' >
+        <ul className='px-5 space-y-2 ' >
           <li className=' p-2 cursor-pointer hover:bg-slate-900 hover:text-white ' onClick={() => {toggleSidebar(); navigate("/")}}>
-            HOME
+            Home
           </li>
           <li className='p-2 cursor-pointer hover:bg-slate-900 hover:text-white ' onClick={() => {toggleSidebar(); navigate("/live-tv")}}>
-          LIVE-TV
+          Live-TV
           </li>
+          
+          {/* Dropdown for Platforms */}
+          <div className="relative">
+              <button
+                onClick={toggleDropdown} 
+                className="flex items-center text-black px-3 py-2 cursor-pointer"
+              >
+                Platforms <FaAngleDown />
+              </button>
+              {dropdownOpen && (
+                <ul className="absolute left-0 bg-white shadow-lg mt-2 rounded-md w-48 py-2">
+                  <a href='https://online.lwfoundationschool.org/'>
+                    <li
+                      className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                      onClick={() => {
+                        navigate('/online-class');
+                        setDropdownOpen(false);
+                      }}
+                    >
+                      Online Class
+                    </li>
+                  </a>
+                  
+                  <a href='https://lwfoundationschool.org/testimonybank/'>
+                    <li
+                      className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                      onClick={() => {
+                        navigate('/testimony-bank');
+                        setDropdownOpen(false);
+                      }}
+                    >
+                      Testimony Bank
+                    </li>
+                  </a>
+                  
+                  <li
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                    onClick={() => {
+                      navigate('/exams');
+                      setDropdownOpen(false);
+                    }}
+                  >
+                    Exams
+                  </li>
+                </ul>
+              )}
+            </div>
 
           <li className='p-2 cursor-pointer hover:bg-slate-900 hover:text-white ' onClick={() => {toggleSidebar(); navigate("/posts")}}>
-          POSTS
+          Posts
           </li>
         
-          <a href='' className='p-2 cursor-pointer hover:bg-slate-900 hover:text-white' >LWFS Store</a>
-          <a href='' className='p-2 cursor-pointer hover:bg-slate-900 hover:text-white' >Online Class</a>
-          <a href='' className='p-2 cursor-pointer hover:bg-slate-900 hover:text-white' >Testimony Bank</a>
         </ul>
+        <button className='absolute cursor-pointer bg-lw_dark_blue text-white w-40 px-10 py-2 rounded-md self-center bottom-5' onClick={logout}>Logout</button>
       </div>
+
+      
     </div>
       
         

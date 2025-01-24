@@ -128,7 +128,7 @@ const checkAuthToken = async () => {
 
   if (!token) {
     setLoggedIn(false); // No token, user is not logged in
-    setIsModalOpen(true);
+    // setIsModalOpen(true);
     return;
   }
 
@@ -137,13 +137,13 @@ const checkAuthToken = async () => {
 
     if (response.status === 200) {
       setLoggedIn(true); // Valid token, user is logged in
-      setIsModalOpen(false);
+      // setIsModalOpen(false);
     } 
   
   } catch (error) {
     console.error("Token verification error:", error);
     setLoggedIn(false); // Error in token validation
-    setIsModalOpen(true);
+    // setIsModalOpen(true);
   }
 };
 

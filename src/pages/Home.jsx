@@ -15,7 +15,7 @@ function Home() {
   
     const slides = [
       {url: "../images/hslhs.jpeg", link: "https://healingstreams.tv/LHS", title: "Healing Streams Live healing Services with Pastor Chris"},
-      {url: "../images/jan-jan.jpg", link: "https://lwfoundationschool.org/homes/", title: "Jan-comm"},
+      // {url: "../images/jan-jan.jpg", link: "https://lwfoundationschool.org/homes/", title: "Jan-comm"},
       // {url: "https://res.cloudinary.com/dfi8bpolg/image/upload/v1736329279/samples/smile.jpg", title: "logo"},
     ];
 
@@ -92,9 +92,9 @@ function Home() {
           
       {/* Post */}
       <div>
-        <div className='relative group flex flex-col h-[350px] w-screen gap-5 justify-center items-center text-center'>
+        <div className='relative group flex flex-col h-[350px] w-screen gap-5 justify-end items-center text-center'>
             <img className='absolute w-full h-full object-cover' src='../images/loading-1q.jpg'/>
-            <div onClick={()=>navigate("/posts")} className=' cursor-pointerabsolute inset-0 flex flex-col w-full h-12 self-end justify-self-center text-xl bg-lw_yellow justify-center items-center text-black text-center opacity-0 transition-opacity duration-500 group-hover:opacity-90'>
+            <div onClick={()=>navigate("/posts")} className=' cursor-pointerabsolute inset-0 flex flex-col w-full h-12 self-end justify-self-center text-xl bg-lw_yellow justify-center items-center text-black text-center opacity-0 transition-opacity transform duration-500 group-hover:opacity-90'>
               <h1 className="cursor-pointer" onClick={()=>navigate("/posts")}>View More Post</h1>
             </div>
               
@@ -112,7 +112,7 @@ function Home() {
       {/* Testimony slider*/}
       <div className='flex flex-col w-screen h-[450px] relative group' >
         <img src='../images/partnership.jpg' className='absolute object-cover flex w-full h-full'/>
-        <a href='https://lwfoundationschool.org/testimonybank/' target="_blank" className='flex flex-col absolute text-xl inset-0 bg-lw_yellow w-full text-black h-12 bottom-8 self-end justify-center items-center text-center opacity-0 group-hover:opacity-90'>
+        <a href='https://lwfoundationschool.org/testimonybank/' target="_blank" className='flex flex-col absolute text-xl inset-0 bg-lw_yellow w-full text-black h-12 bottom-8 self-end justify-center items-center text-center opacity-0 group-hover:opacity-90 transform duration-500'>
           <p>Share Your Testimony</p>
         </a>
       </div>
