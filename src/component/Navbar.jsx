@@ -109,7 +109,13 @@ function Navbar() {
                       setDropdownOpen(false);
                     }}
                   >
-                    Exams
+                    LWFS Store
+                  </li>
+
+                  <li
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                  >
+                    Portal
                   </li>
                 </ul>
               )}
@@ -158,7 +164,7 @@ function Navbar() {
             Home
           </li>
           <li className='p-2 cursor-pointer hover:bg-slate-900 hover:text-white ' onClick={() => {toggleSidebar(); navigate("/live-tv")}}>
-          Live-TV
+          Live - TV
           </li>
           
           {/* Dropdown for Platforms */}
@@ -197,12 +203,14 @@ function Navbar() {
                   
                   <li
                     className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                    onClick={() => {
-                      navigate('/exams');
-                      setDropdownOpen(false);
-                    }}
                   >
-                    Exams
+                    LWFS Store
+                  </li>
+
+                  <li
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                  >
+                    Portal
                   </li>
                 </ul>
               )}

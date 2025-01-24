@@ -58,7 +58,7 @@ function VideoSlider({ slides, autoScroll = true, interval = 3000 }) {
         controls
         controlsList="nodownload"
         src={slides[currentIndex]?.url}
-      />
+      ></video>
 
       {/* <iframe src={slides[currentIndex]?.url}
       className="w-full h-full object-contain" 
