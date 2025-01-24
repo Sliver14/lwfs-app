@@ -18,7 +18,7 @@ export default {
         lw_gray: "#D9D9D9",
       },
       fontFamily: {
-        sans: ['Inter', 'ui-sans-serif', 'system-ui'], // Add Inter as the default sans-serif
+        sans: ['Poppins', 'ui-sans-serif', 'system-ui'], // Add Inter as the default sans-serif
       },
     },
   },

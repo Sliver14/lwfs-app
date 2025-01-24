@@ -46,7 +46,7 @@ function VideoSlider({ slides, autoScroll = true, interval = 3000 }) {
 
   return (
     <div
-      className="flex flex-col w-full h-full overflow-hidden rounded-lg"
+      className="flex flex-col w-full h-full overflow-hidden"
       // {...swipeHandlers}
     >
       {/* Video Slide */}

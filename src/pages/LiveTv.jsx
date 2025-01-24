@@ -5,7 +5,7 @@ function LiveTv() {
   return (
     <div className='flex flex-col pt-16'>
       <div className='w-screen h-[38vh]'>
-      <video src="https://res.cloudinary.com/dfi8bpolg/video/upload/v1736329276/samples/dance-2.mp4"
+      <video src="https://res.cloudinary.com/dfi8bpolg/video/upload/v1737680677/evtznnwqnmgyshvhzidd.mp4"
       className="w-full h-full object-contain " 
         controls
         frameBorder="0"
