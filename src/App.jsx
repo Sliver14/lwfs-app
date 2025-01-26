@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import './App.css'
+import React from 'react';
+import {useState } from 'react';
+import './App.css';
 import 'typeface-poppins';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from "./pages/Home";
@@ -12,7 +13,10 @@ import PageNotFound from './component/PageNotFound';
 import Posts from './pages/Posts';
 import Platforms from './pages/Platforms';
 // import VerifyCode from './component/VerifyCode';
-import PostPage from './pages/PostPage'
+import PostPage from './pages/PostPage';
+import ProtectedRoute from './utils/ProtectedRoute';
+import process from 'process';
+
 
 
 
@@ -23,7 +27,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/live-tv" element={<LiveTv />} />
+        <Route path="/live-tv" element={<ProtectedRoute><LiveTv /></ProtectedRoute>} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/posts" element={<Posts />} />
         <Route path="/platforms" element={<Platforms />} />

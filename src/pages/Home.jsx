@@ -29,7 +29,7 @@ function Home() {
 
        <div className='flex flex-col pt-12 pb-20 gap-5' >
 
-      <Modal/>
+      {/* <Modal/> */}
       
       <div className='flex flex-col relative w-screen'>
         <div className='relative h-52 max-h-[600px] w-screen md:h-80'>

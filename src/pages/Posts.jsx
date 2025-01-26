@@ -24,7 +24,7 @@ function Posts() {
   }, []);
 
   return (
-    <div className='mt-28'>
+    <div className='mt-20'>
       {/* LWFS News (blog) e.g graduation highlights */}
       <div className='flex flex-col w-screen items-center justify-center'>
       <div className='flex flex-col w-[98%] shadow-lg' >

@@ -7,18 +7,23 @@ import zones from "../utils/zones.js";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useNavigate, Link, NavLink } from 'react-router-dom';
+
 
 function Modal() {
-  const [isModalOpen, setIsModalOpen] = useState(null);
+  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [loading, setLoading] = useState(false); // Loading state
   const [code, setCode] = useState("");
   const [step, setStep] = useState(1);
-  const PORT = "https://lwfs-app-server-production.up.railway.app";
-  // const PORT = "http://localhost:3001";
-
+  // const PORT = "https://lwfs-app-server-production.up.railway.app";
+      const PORT = "http://localhost:3001";
+      const apiUrl = process.env.REACT_APP_API_URL;
+  
   
 
   const initialValues = {
@@ -59,24 +64,28 @@ function Modal() {
 // Function to handle sign-in
 const handleSubmit = async (e) => {
   e.preventDefault();
-
+  setLoading(true);
   try {
-    const response = await axios.post(`${PORT}/auth/signin`, { email });
+    const response = await axios.post(`${apiUrl}/auth/signin`, { email });
     setSuccess(response.data.message);
     // setLoggedIn(true); // Set loggedIn to true
     setStep(2);
     // setIsModalOpen(false);
     setError(null); // Clear error
+    navigate('/live-tv');
   } catch (error) {
     console.error("Sign-in error:", error);
     setError(error.response?.data?.error || "Sign-in failed");
     // setLoggedIn(false); // Set loggedIn to false on error
+  }finally {
+    setLoading(false); // Stop loading
   }
 };
 
 // Signin verification
 const signinVerification = async (e) => {
   e.preventDefault();
+  setLoading(true);
   
   try{
     const response = await axios.post(`${PORT}/auth/verify-signin`, { email, code });
@@ -89,8 +98,12 @@ const signinVerification = async (e) => {
     setSuccess(response.data.message);
     setIsModalOpen(false);
     setLoggedIn(true);
+    navigate('/live-tv');
+    window.location.reload();
   } catch (error){
     setError(error.response?.data?.error || "Verification failed");
+  } finally {
+    setLoading(false);
   }
 }
 
@@ -121,41 +134,18 @@ const signupVerification = async (e) => {
   }
 }
 
-// Function to check if a valid token exists
-const checkAuthToken = async () => {
-  const token = Cookies.get("authToken");
-  console.log("Auth token:", token);
-
-  if (!token) {
-    setLoggedIn(false); // No token, user is not logged in
-    // setIsModalOpen(true);
-    return;
-  }
-
-  try {
-    const response = await axios.post(`${PORT}/auth/verify`, { token });
-
-    if (response.status === 200) {
-      setLoggedIn(true); // Valid token, user is logged in
-      // setIsModalOpen(false);
-    } 
-  
-  } catch (error) {
-    console.error("Token verification error:", error);
-    setLoggedIn(false); // Error in token validation
-    // setIsModalOpen(true);
-  }
-};
-
-// Run token check on component mount
+// Check for token on component mount
 useEffect(() => {
-  checkAuthToken();
+  const token = Cookies.get("authToken");
+  if (token) {
+    setLoggedIn(true);
+    setIsModalOpen(false); // Close the modal if a valid token is found
+  }
 }, []);
 
-
-//close modal
 const closeModal = () => {
   setIsModalOpen(false);
+  navigate("/");
 }
 
   return (
@@ -176,7 +166,9 @@ const closeModal = () => {
                {/* Login */}
               <div className='flex flex-col items-center' >
                 <input onChange={(event) => setEmail(event.target.value)} className='border border-lwfs3 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-lwfs2 text-2xl' type="text" placeholder='Email'/>
-                <button onClick={handleSubmit} className='bg-lwfs2 w-32 mt-5 rounded-md text-white p-2 mb-5' >Sign In </button>
+                <button onClick={handleSubmit} 
+                className={`bg-lw_blue w-32 mt-5 rounded-md text-white p-2 mb-5 ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 text-white"}`} 
+                disabled={loading} >{loading ? "Signing In..." : "Sign In"}</button>
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 {success && <p style={{ color: "green" }}>{success}</p>}
                 <span onClick={()=>{setStep(3)}}>New here? <a className='text-lwfs2 cursor-pointer' >Create Account</a></span>
@@ -191,7 +183,8 @@ const closeModal = () => {
                   type="text"
                   onChange={(e) => setCode(e.target.value)}
                 />
-                <button onClick={signinVerification}>Verify Code</button>
+                <button onClick={signinVerification} className={`bg-lw_blue w-32 mt-5 rounded-md text-white p-2 mb-5 ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 text-white"}`} 
+                disabled={loading}>{loading ? "Verifying..." : "Verify Code"}</button>
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 {success && <p style={{ color: "green" }}>{success}</p>}
                 <button >Re-send code</button>

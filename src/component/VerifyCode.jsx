@@ -5,12 +5,13 @@ function VerifyCode() {
     const [email, setEmail] = useState("");
     const [code, setCode] = useState("");
     const [step, setStep] = useState(1);
+    const apiUrl = process.env.REACT_APP_API_URL;
 
     const signin = async (e) => {
         e.preventDefault();
 
         try{
-            const response = await axios.post("http://localhost:3001/auth/signin", { email} );
+            const response = await axios.post(`${apiUrl}/auth/signin`, { email} );
             setStep(2)
         } catch(error){
             
@@ -21,7 +22,7 @@ const verifySignin = async (e) => {
         e.preventDefault();
 
         try{
-            const response = await axios.post("http://localhost:3001/auth/verify-signin", { email, code} );
+            const response = await axios.post(`${apiUrl}/auth/verify-signin`, { email, code} );
             
         } catch(error){
 

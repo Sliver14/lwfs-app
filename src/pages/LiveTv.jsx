@@ -1,28 +1,35 @@
 import React from 'react'
 import ReactPlayer from 'react-player';
+import Modal from "../component/Modal"
+
 
 function LiveTv() {
   return (
-    <div className='flex flex-col pt-16 text-sm'>
-      <div className='w-screen h-72 '>
-      <video 
-        src="https://res.cloudinary.com/dfi8bpolg/video/upload/v1737680677/evtznnwqnmgyshvhzidd.mp4"
-        className="w-full h-full object-contain" 
-        controls
-        muted={false}
-        controlsList="nodownload"
-      ></video>
+    
+    <div className='flex flex-col pt-16 text-sm w-screen md:flex-row'>
+  
+      <div className='flex flex-col md:flex-1'>
+        <div className='w-screen h-64 md:w-1/2 md:h-[650px]'>
+        <video 
+          src="https://res.cloudinary.com/dfi8bpolg/video/upload/v1737680677/evtznnwqnmgyshvhzidd.mp4"
+          className="w-full h-full object-contain" 
+          controls
+          muted={false}
+          controlsList="nodownload"
+        ></video>
+        </div>
+        <div className='flex font-medium justify-center items-center space-x-5 my-2'>
+          <button className='px-5 py-2 text-black bg-lw_yellow rounded-lg'>Share Testimony</button>
+          <button className='px-5 py-2 text-white bg-lw_green rounded-lg'>Receive Salvation</button>
+        </div>
       </div>
-      <div className='flex font-medium justify-center items-center space-x-5 p-5'>
-        <button className='px-5 py-2 text-black bg-lw_yellow rounded-lg'>Share Testimony</button>
-        <button className='px-5 py-2 text-white bg-lw_green rounded-lg'>Receive Salvation</button>
-      </div>
+      
 
-      <div className='flex flex-col mt-5 pb-5'>
-        <div className='w-screen h-32'>
+      <div className='flex flex-col mt-5 pb-5 md:flex-1'>
+        <div className='w-screen h-32 md:w-1/2 md:h-[450px]'>
           <img className='w-full h-full object-contain' src="../images/year.jpeg" alt="" />
         </div>
-        <div className='flex mt-2 w-screen'>
+        <div className='flex mt-2 w-screen md:w-1/2'>
           <button className='bg-lw_blue px-8 py-2 text-white'>Live Chat</button>
           <button className='bg-lw_yellow px-8 py-2'>Programme Line-UP</button>
         </div>
@@ -43,9 +50,6 @@ function LiveTv() {
             <button className='bg-lw_blue w-full text-lg text-white self-center  py-2 rounded-md cursor-pointer'>Submit</button>
           </div>
         </div>
-       
-
-        
         
       </div>
     </div>
