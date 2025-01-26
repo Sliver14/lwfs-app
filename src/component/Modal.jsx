@@ -20,8 +20,8 @@ function Modal() {
   const [loading, setLoading] = useState(false); // Loading state
   const [code, setCode] = useState("");
   const [step, setStep] = useState(1);
-  // const PORT = "https://lwfs-app-server-production.up.railway.app";
-      const PORT = "http://localhost:3001";
+  const PORT = "https://lwfs-app-server-production.up.railway.app";
+      // const PORT = "http://localhost:3001";
       const apiUrl = process.env.REACT_APP_API_URL;
   
   
@@ -66,7 +66,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   setLoading(true);
   try {
-    const response = await axios.post(`${apiUrl}/auth/signin`, { email });
+    const response = await axios.post(`${PORT}/auth/signin`, { email });
     setSuccess(response.data.message);
     // setLoggedIn(true); // Set loggedIn to true
     setStep(2);
