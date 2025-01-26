@@ -66,7 +66,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   setLoading(true);
   try {
-    const response = await axios.post(`${PORT}/auth/signin`, { email });
+    const response = await axios.post(`${apiUrl}/auth/signin`, { email });
     setSuccess(response.data.message);
     // setLoggedIn(true); // Set loggedIn to true
     setStep(2);
@@ -88,7 +88,7 @@ const signinVerification = async (e) => {
   setLoading(true);
   
   try{
-    const response = await axios.post(`${PORT}/auth/verify-signin`, { email, code });
+    const response = await axios.post(`${apiUrl}/auth/verify-signin`, { email, code });
 
     const { token } = response.data;
 
@@ -112,7 +112,7 @@ const onSubmit = async (data) => {
   setError("");
   setSuccess("");
 try {
-  const response = await axios.post(`${PORT}/auth/signup` ,data);
+  const response = await axios.post(`${apiUrl}/auth/signup` ,data);
   setStep(4);
   setSuccess(response.data.message);
 } catch(error){
@@ -126,7 +126,7 @@ const signupVerification = async (e) => {
   e.preventDefault();
   
   try{
-    const response = await axios.post(`${PORT}/auth/verify-signup`, { email, code });
+    const response = await axios.post(`${apiUrl}/auth/verify-signup`, { email, code });
     setSuccess(response.data.message);
     setStep(1);
   } catch (error){
