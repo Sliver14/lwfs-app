@@ -33,13 +33,13 @@ function Posts() {
         
           {listOfPosts.map((post) => ( 
           <>
-          <div key={post.id} className='flex flex-col pl-3 m-1 border-2 rounded-md border-gray-100  hover:border-[0.8px] hover:border-lwfs2 hover:rounded-lg'>
+          <div key={post.id} className='flex flex-col pl-3 m-1 border-2 rounded-md border-gray-100  hover:border-[0.5px] hover:border-lw_blue hover:rounded-lg'>
             <div className='flex flex-col h-auto w-[98%] mt-3' >
             <img className='flex h-full w-full rounded-lg ' src={post.postPhoto}  alt=''/>
           </div>
           <div className='flex gap-5 my-3'>
             <button className='bg-red-600 text-white text-sm px-2 py-[3px] rounded-sm'>Blog</button>
-            <h1 className='flex items-center gap-1'><IoTimeOutline />{post.createdAt}</h1>
+            <h1 className='flex items-center gap-1'><IoTimeOutline />({new Date(post.createdAt).toLocaleString()})</h1>
             <h1 className='flex items-center gap-1'><GrView /> 293</h1>
           </div>
 

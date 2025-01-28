@@ -11,53 +11,38 @@ import { FaAngleDown } from "react-icons/fa6";
 import Modal from "../component/Modal";
 import axios from 'axios';
 
-
-
 function Navbar() {
   const location = useLocation();
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(true);
-    // const PORT = "https://lwfs-app-server-production.up.railway.app";
-    const PORT = "http://localhost:3001";
+    const [loggedIn, setLoggedIn] = useState(false);
     const activeClass = "flex px-3 py-2 rounded-lg font-medium bg-opacity-90 transform duration-300 bg-lw_red text-white";
     const inactiveClass = "flex text-black px-3 py-2 rounded-lg hover:bg-[#7B7777] hover:bg-opacity-25 hover:text-black transform duration-300";
+    const [user, setUser] = useState("");
+    // const apiUrl = 'http://localhost:3001';
+    const apiUrl = "https://lwfs-app-server-production.up.railway.app";
+    const [loading, setLoading] = useState(true);
 
+    useEffect(()=>{
+      const fetchUserDetails = async () => {
+        try {
+          const response = await axios.get(`${apiUrl}/auth/verify`, {
+            withCredentials: true, // Ensure proper spelling
+          });
+          setUser(response.data.user);
+          setLoggedIn(true);
+          console.log(user.id);
+          
+        } catch (error) {
+          console.error('Verification failed:', error.message);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-    // const handleLiveTv = async () => {
-    //   const token = Cookies.get("authToken");
-    //   console.log("Authtoken:", token);
-    
-    //   if (!token) {
-    //     console.error("No token found in cookies!");
-    //     setLoggedIn(false); // No token, user is not logged in
-    //     return;
-    //   }
-      
-    
-    //   try {
-    //     // Ensure headers are sent as part of the Axios configuration
-    //     const response = await axios.post(
-    //       `${PORT}/auth/verify`,
-    //       {}, // Empty body
-    //       {
-    //         headers: {
-    //           Authorization: `Bearer ${token}`, // Pass the token here
-    //         },
-    //       }
-    //     );
-    
-    //     if (response.status === 200) {
-    //       setLoggedIn(true);
-    //       // Redirect or show live TV page
-    //       navigate("/live-tv");
-    //     }
-    //   } catch (error) {
-    //     console.error("Token verification failed:", error);
-    //     setLoggedIn(false);
-    //   }
-    // };
+      fetchUserDetails();
+    },[])
 
     const logout = () => {
         // Remove the authToken cookie
@@ -71,15 +56,8 @@ function Navbar() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location])
+ 
 
-  useEffect(()=>{
-     const token = Cookies.get('authToken');
-        if (token) {
-          setLoggedIn(true); // Close the modal
-        } else {
-          setLoggedIn(false);
-        }
-  })
     const toggleSidebar = () => {
       setIsOpen(!isOpen);
       
@@ -118,7 +96,7 @@ function Navbar() {
 
             <NavLink to="/live-tv"
               className={({ isActive }) => (isActive ? activeClass : inactiveClass)}
-              onClick={()=> navigate("/live-tv")}
+              onClick={() => navigate("/live-tv")}
             >
               Live - TV
             </NavLink>
@@ -193,10 +171,9 @@ function Navbar() {
         </div>
         <div className='hidden md:flex'>
         {!loggedIn ?<div className='hidden md:flex items-center space-x-5 mr-10'>
-          <h1 className='cursor-pointer'>Login</h1>
-          <h1 className='cursor-pointer'>Register</h1>
+          <h1 onClick={()=>{navigate("/modal")}} className='cursor-pointer'>Login/Register</h1>
         </div> : <div>
-          <h1>Username</h1>
+          <h1>{user.firstName}</h1>
           <button onClick={logout} className='px-8 py-2 bg-lw_blue text-white'>Logout</button>
           </div> }
         </div>
@@ -288,7 +265,9 @@ function Navbar() {
         
       </div>
       <div className='flex absolute bottom-5 left-1/2'>
-        {!loggedIn ? <h1>Signin/Register</h1> : <button className='absolute cursor-pointer bg-lw_dark_blue text-white w-40 px-10 py-2 rounded-md self-center bottom-5' onClick={logout}>Logout</button>}
+        {!loggedIn ? <h1 className='cursor-pointer' onClick={()=>{navigate("/modal")}}>Signin/Register</h1> : <div>
+          <h1>{user.firstName}</h1><button className='absolute cursor-pointer bg-lw_dark_blue text-white w-40 px-10 py-2 rounded-md self-center bottom-5' onClick={logout}>Logout</button>
+          </div>}
         </div>
       
     </div>

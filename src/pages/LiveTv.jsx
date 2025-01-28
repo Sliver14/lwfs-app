@@ -1,9 +1,68 @@
-import React from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import ReactPlayer from 'react-player';
-import Modal from "../component/Modal"
+import Modal from "../component/Modal";
+import axios from 'axios';
+// import io from 'socket.io-client';
 
 
 function LiveTv() {
+  const [content, setContent] = useState('');
+  const [onCommentPosted, setOnCommentPosted] = useState("");
+  // const apiUrl = 'http://localhost:3001';
+  const apiUrl = "https://lwfs-app-server-production.up.railway.app";
+  const [comments, setComments] = useState([]);
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [comments]);
+  
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!content.trim()) {
+      alert('Comment cannot be empty');
+      return;
+    }
+
+    try {
+      const response = await axios.post(`${apiUrl}/comment`, { content }, {
+        withCredentials: true, // Include user token from cookies
+      });
+
+      setOnCommentPosted(response.data); // Update the comment list
+
+      const handleNewComment = (newComment) => {
+        setComments((onCommentPosted) => [newComment, ...onCommentPosted]); // Add the new comment to the list
+      };
+
+      setContent(''); // Clear the input
+    } catch (error) {
+      console.error('Error posting comment:', error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/comment`, {
+          withCredentials: true, // Ensure cookies are sent
+        });
+        setComments(response.data);
+        console.log(comments.content)
+      } catch (error) {
+        console.error('Error fetching comments:', error);
+      }
+    };
+
+    fetchComments();
+  }, []);
+
+ 
+
+  
   return (
     
     <div className='flex flex-col pt-16 text-sm w-screen md:flex-row'>
@@ -33,21 +92,21 @@ function LiveTv() {
           <button className='bg-lw_blue px-8 py-2 text-white'>Live Chat</button>
           <button className='bg-lw_yellow px-8 py-2'>Programme Line-UP</button>
         </div>
-
-        <div className='flex flex-col bg-white p-3 border-[1.5px] border-solid border-lw_gray w-screen'>
-          <div className='flex flex-col px-2 py-1 mb-5 border-2 border-solid border-gray-300 rounded-md'>
-            <p className='text-indigo-500 '>Comment</p>
-            <p className='text-xs text-gray-500 italic'>Username</p>
-          </div>
-
-          <div className='flex flex-col px-2 py-1 mb-5 border-2 border-solid border-gray-300 rounded-md'>
-            <p className='text-indigo-500 '>i was so blessed by todays ministration</p>
-            <p className='text-xs text-gray-500 italic'>Username</p>
-          </div>
-
+        
+        <div ref={scrollRef} className='flex flex-col bg-white p-3 border-[1.5px] border-solid border-lw_gray w-screen overflow-y-auto h-[68vh]'>
+          
+        {comments.slice() // Create a copy to avoid mutating the original array
+        .reverse().map((comment) => (
+            <div key={comment.id} className='flex flex-col px-2 py-1 mb-5 border-2 border-solid border-gray-300 rounded-md'>
+              <p className='text-indigo-500 '>{comment.content}</p>
+              <p className='text-xs text-gray-500 italic'>{comment.user?.firstName}</p> 
+              <p className='text-xs text-gray-500'>{new Date(comment.createdAt).toLocaleString()}</p>
+            </div>
+        ))}
+          
           <div className='flex flex-col gap-2'>
-            <textarea className='p-2 grow rounded-md border-[1.5px] border-solid border-black min-h-20' type='text' placeholder='Type your comment here'/>
-            <button className='bg-lw_blue w-full text-lg text-white self-center  py-2 rounded-md cursor-pointer'>Submit</button>
+            <textarea value={content} onChange={(event)=>{setContent(event.target.value)}} className='p-2 grow rounded-md border-[1.5px] border-solid border-black min-h-20' type='text' placeholder='Type your comment here'/>
+            <button onClick={handleSubmit} className='bg-lw_blue w-full text-lg text-white self-center  py-2 rounded-md cursor-pointer'>Submit</button>
           </div>
         </div>
         

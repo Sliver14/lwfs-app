@@ -8,9 +8,10 @@ import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate, Link, NavLink } from 'react-router-dom';
+import process from 'process';
 
 
-function Modal() {
+function Modal () {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -20,9 +21,9 @@ function Modal() {
   const [loading, setLoading] = useState(false); // Loading state
   const [code, setCode] = useState("");
   const [step, setStep] = useState(1);
-  const PORT = "https://lwfs-app-server-production.up.railway.app";
-      // const PORT = "http://localhost:3001";
-      const apiUrl = process.env.REACT_APP_API_URL;
+      // const apiUrl = "http://localhost:3001";
+      const apiUrl = "https://lwfs-app-server-production.up.railway.app";
+      
   
   
 
@@ -72,7 +73,6 @@ const handleSubmit = async (e) => {
     setStep(2);
     // setIsModalOpen(false);
     setError(null); // Clear error
-    navigate('/live-tv');
   } catch (error) {
     console.error("Sign-in error:", error);
     setError(error.response?.data?.error || "Sign-in failed");
@@ -97,8 +97,7 @@ const signinVerification = async (e) => {
 
     setSuccess(response.data.message);
     setIsModalOpen(false);
-    setLoggedIn(true);
-    navigate('/live-tv');
+    // setLoggedIn(true);
     window.location.reload();
   } catch (error){
     setError(error.response?.data?.error || "Verification failed");
@@ -112,12 +111,12 @@ const onSubmit = async (data) => {
   setError("");
   setSuccess("");
 try {
-  const response = await axios.post(`${apiUrl}/auth/signup` ,data);
+  const response = await axios.post(`${apiUrl}/auth/signup`, data);
   setStep(4);
   setSuccess(response.data.message);
 } catch(error){
-  console.error("Sign-up error:", error);
-  setError(err.response?.data?.error || "Error verifiying code");
+  console.error("Already Registered", error);
+  setError(error.response?.data?.error || "Error verifiying code");
 }
 }
 
@@ -134,14 +133,26 @@ const signupVerification = async (e) => {
   }
 }
 
-// Check for token on component mount
-useEffect(() => {
-  const token = Cookies.get("authToken");
-  if (token) {
-    setLoggedIn(true);
-    setIsModalOpen(false); // Close the modal if a valid token is found
-  }
-}, []);
+useEffect(()=>{
+  const fetchUserDetails = async () => {
+    try {
+      const response = await axios.get(`${apiUrl}/auth/verify`, {
+        withCredentials: true, // Ensure proper spelling
+      });
+      setLoggedIn(true);  
+      setIsModalOpen(false);
+      navigate("/");    
+    } catch (error) {
+      console.error('Verification failed:', error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchUserDetails();
+},[])
+
+
 
 const closeModal = () => {
   setIsModalOpen(false);
@@ -152,7 +163,7 @@ const closeModal = () => {
     <div>
            {/* Modal */}
            {isModalOpen && (
-        <div className="flex flex-col fixed top-0 left-0 rigth-0 bottom-0 w-screen h-screen bg-lwfs4 justify-center items-center bg-opacity-80 z-50 transition duration-300 ">
+        <div className="flex flex-col fixed top-0 left-0 rigth-0 bottom-0 w-screen h-screen bg-lw_gray justify-center items-center bg-opacity-80 z-50 transition duration-300 ">
           
           <div className="relative flex w-11/12 h-5/6 transition duration-300 justify-center items-center bg-white rounded-lg overflow-y-auto">
             
@@ -178,6 +189,7 @@ const closeModal = () => {
 
             { step === 2 && 
               <>
+                <h2>{email}</h2>
                 <h2>Enter Verification Code</h2>
                 <input
                   type="text"
@@ -187,7 +199,7 @@ const closeModal = () => {
                 disabled={loading}>{loading ? "Verifying..." : "Verify Code"}</button>
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 {success && <p style={{ color: "green" }}>{success}</p>}
-                <button >Re-send code</button>
+                <button onClick={handleSubmit}>Re-send code</button>
                 <buttton onClick={() => {setStep(1)}}>Signin</buttton>
                 <buttton onClick={() => {setStep(3)}}>Signup</buttton>
               </>
@@ -200,7 +212,7 @@ const closeModal = () => {
               </div>
               <div>
               <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
-              {({ values, handleChange }) => (
+              {({ values, handleChange, setFieldValue }) => (
                 <Form className="max-w-md mx-auto bg-white shadow-md rounded-lg p-6 space-y-4">
                   {/* First Name */}
                   <div className="flex flex-col">
@@ -314,7 +326,7 @@ const closeModal = () => {
                       onChange={(e) => {
                         handleChange(e);
                         setEmail(e.target.value); // Update external state
-                        formik.setFieldValue("email", e.target.value); // Update Formik state
+                        setFieldValue("email", e.target.value); // Update Formik state
                       }}
                       
                       className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -354,6 +366,7 @@ const closeModal = () => {
 
               { step === 4 && 
               <>
+                <h2>{email}</h2>
                 <h2>Enter Verification Code</h2>
                 <input
                   type="text"
@@ -362,7 +375,7 @@ const closeModal = () => {
                 <button onClick={signupVerification}>Verify Code</button>
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 {success && <p style={{ color: "green" }}>{success}</p>}
-                <button >Re-send code</button>
+                <button>Re-send code</button>
                 <buttton onClick={() => setStep(1)}>Signin</buttton>
                 <buttton onClick={() => setStep(3)}>Signup</buttton>
               </>

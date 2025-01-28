@@ -15,6 +15,7 @@ import Platforms from './pages/Platforms';
 // import VerifyCode from './component/VerifyCode';
 import PostPage from './pages/PostPage';
 import ProtectedRoute from './utils/ProtectedRoute';
+import Modal from './component/Modal';
 import process from 'process';
 
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/footer" element={<Footer />} />
         <Route path="/postpage" element={<PostPage/>}/>
         <Route path="/logoslider" element={<LogoSlider/>}/>
+        <Route path="/modal" element={<Modal/>}/>
         {/* <Route path="/verifycode" element={<VerifyCode />} /> */}
         <Route path="*" element={<PageNotFound />} />
         
