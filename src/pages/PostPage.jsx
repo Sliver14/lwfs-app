@@ -12,8 +12,8 @@ function PostPage() {
 
     const handlePost = async (e) => {
       e.preventDefault();
-      const PORT = "https://lwfs-app-server-production.up.railway.app";
-      // const PORT = "http://localhost:3001";
+      const apiUrl = "https://lwfs-app-server-production.up.railway.app";
+      // const apiUrl = "http://localhost:3001";
 
       if (!postPhoto) {
         alert("Please select a file to upload");
@@ -37,7 +37,7 @@ function PostPage() {
           setCloudinaryUrl(uploadedUrl);
 
 
-          await axios.post(`${PORT}/posts`, {postPhoto: uploadedUrl, postTitle, postBody});
+          await axios.post(`${apiUrl}/posts`, {postPhoto: uploadedUrl, postTitle, postBody});
           setSuccess(response.data.message)
         } catch (error){
           console.error("failed to upload")

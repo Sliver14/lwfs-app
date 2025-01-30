@@ -1,23 +1,70 @@
 import React, { useEffect, useState, useRef } from 'react'
-import ReactPlayer from 'react-player';
+import videojs from "video.js";
 import Modal from "../component/Modal";
 import axios from 'axios';
+import Hls from "hls.js";
+import HlsPlayer from "../component/HlsPlayer"
 // import io from 'socket.io-client';
 
 
 function LiveTv() {
+  
   const [content, setContent] = useState('');
   const [onCommentPosted, setOnCommentPosted] = useState("");
   // const apiUrl = 'http://localhost:3001';
   const apiUrl = "https://lwfs-app-server-production.up.railway.app";
   const [comments, setComments] = useState([]);
   const scrollRef = useRef(null);
+  const videoRef = useRef(null);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
+//Hls component
+  // useEffect(() => {
+  //   if (Hls.isSupported()) {
+  //     const hls = new Hls();
+  //     hls.loadSource("https://res.cloudinary.com/dfi8bpolg/video/upload/v1737680677/evtznnwqnmgyshvhzidd.mp4");
+  //     hls.attachMedia(videoRef.current);
+
+  //     hls.on(Hls.Events.MANIFEST_PARSED, () => {
+  //       videoRef.current.play();
+  //     });
+
+  //     return () => {
+  //       hls.destroy();
+  //     };
+  //   }
+  // }, []);
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [comments]);
+
+  // Live-tv Attendance
+  useEffect(() => {
+    if (!hasSubmitted) {
+    const recordAttendance = async () => {
+      try {
+        await axios.post(
+          `${apiUrl}/comment/attendance`,
+          { page: "live_tv" },
+          {
+            // headers: {
+            //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+            // },
+            withCredentials: true,
+          }
+        );
+
+      } catch (error) {
+        console.error("Error recording attendance:", error);
+      }
+    };
+  
+    recordAttendance();
+  }
+  }, [hasSubmitted]);
   
 
   const handleSubmit = async (e) => {
@@ -43,7 +90,8 @@ function LiveTv() {
       console.error('Error posting comment:', error);
     }
   };
-
+ 
+  // Fetch Comment
   useEffect(() => {
     const fetchComments = async () => {
       try {
@@ -60,22 +108,23 @@ function LiveTv() {
     fetchComments();
   }, []);
 
- 
 
-  
   return (
     
     <div className='flex flex-col pt-16 text-sm w-screen md:flex-row'>
   
       <div className='flex flex-col md:flex-1'>
         <div className='w-screen h-64 md:w-1/2 md:h-[650px]'>
-        <video 
-          src="https://res.cloudinary.com/dfi8bpolg/video/upload/v1737680677/evtznnwqnmgyshvhzidd.mp4"
+        {/* <video 
+          src="https://stream.mux.com/test_video.m3u8" type="application/x-mpegURL"
           className="w-full h-full object-contain" 
           controls
           muted={false}
           controlsList="nodownload"
-        ></video>
+        >
+        </video> */}
+        {/* <video ref={videoRef} controls width="100%" /> */}
+        <HlsPlayer className="w-full h-full object-contain" src="" />
         </div>
         <div className='flex font-medium justify-center items-center space-x-5 my-2'>
           <button className='px-5 py-2 text-black bg-lw_yellow rounded-lg'>Share Testimony</button>

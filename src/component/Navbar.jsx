@@ -20,6 +20,7 @@ function Navbar() {
     const activeClass = "flex px-3 py-2 rounded-lg font-medium bg-opacity-90 transform duration-300 bg-lw_red text-white";
     const inactiveClass = "flex text-black px-3 py-2 rounded-lg hover:bg-[#7B7777] hover:bg-opacity-25 hover:text-black transform duration-300";
     const [user, setUser] = useState("");
+    const [groupParticipation, setGroupParticipation] = useState("");
     // const apiUrl = 'http://localhost:3001';
     const apiUrl = "https://lwfs-app-server-production.up.railway.app";
     const [loading, setLoading] = useState(true);
@@ -66,6 +67,18 @@ function Navbar() {
     const toggleDropdown = () => {
       setDropdownOpen(!dropdownOpen);
     };
+
+    const updateAttendance = async (e) => {
+      e.preventDefault();
+      try{
+
+        const response = await axios.post(`${apiUrl}/comment/update`, { groupParticipation }, {
+          withCredentials: true, // Include user token from cookies
+        });
+      } catch(error){
+
+      }
+    }
     
   return (
     // Navbar
@@ -174,6 +187,8 @@ function Navbar() {
           <h1 onClick={()=>{navigate("/modal")}} className='cursor-pointer'>Login/Register</h1>
         </div> : <div>
           <h1>{user.firstName}</h1>
+          <input onChange={(event) => setGroupParticipation(event.target.value)} type="number" placeholder='Group Attendance' min="1" max="5,000" />
+          <button onClick={updateAttendance}>Update</button>
           <button onClick={logout} className='px-8 py-2 bg-lw_blue text-white'>Logout</button>
           </div> }
         </div>

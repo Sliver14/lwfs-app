@@ -21,12 +21,10 @@ function Modal () {
   const [loading, setLoading] = useState(false); // Loading state
   const [code, setCode] = useState("");
   const [step, setStep] = useState(1);
-      // const apiUrl = "http://localhost:3001";
-      const apiUrl = "https://lwfs-app-server-production.up.railway.app";
+      const apiUrl = "http://localhost:3001";
+      // const apiUrl = "https://lwfs-app-server-production.up.railway.app";
       
   
-  
-
   const initialValues = {
     // title: "",
     firstName: "",
@@ -93,7 +91,7 @@ const signinVerification = async (e) => {
     const { token } = response.data;
 
     // Save token to cookies
-    Cookies.set("authToken", token, { expires: 30, secure: false, sameSite: "strict" });
+    Cookies.set("authToken", token, { expires: 30, secure: process.env.NODE_ENV === "production" , sameSite: "strict" });
 
     setSuccess(response.data.message);
     setIsModalOpen(false);
@@ -123,13 +121,26 @@ try {
 // Signup verification
 const signupVerification = async (e) => {
   e.preventDefault();
-  
+  setLoading(true);
+
   try{
     const response = await axios.post(`${apiUrl}/auth/verify-signup`, { email, code });
+
+    // const { token } = response.data;
+
+    // // Save token to cookies
+    // Cookies.set("authToken", token, { expires: 30, secure: process.env.NODE_ENV === "production" , sameSite: "strict" });
+
     setSuccess(response.data.message);
     setStep(1);
+    // setIsModalOpen(false);
+    // // setLoggedIn(true);
+    // window.location.reload();
+        
   } catch (error){
     setError(error.response?.data?.error || "Verification failed");
+  } finally {
+    setLoading(false);
   }
 }
 
@@ -151,7 +162,6 @@ useEffect(()=>{
 
   fetchUserDetails();
 },[])
-
 
 
 const closeModal = () => {
