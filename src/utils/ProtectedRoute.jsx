@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import Modal from '../component/Modal';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const ProtectedRoute = ({ children }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+  // const [isModalOpen, setIsModalOpen] = useState(true);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const apiUrl = 'http://localhost:3001';
 
   useEffect(() => {
@@ -35,11 +37,19 @@ const ProtectedRoute = ({ children }) => {
 
   // If the user is not authenticated, show a modal or redirect
   if (!isAuthenticated) {
-    return <Modal />
-  }
+    return (      
+      // <Modal isOpen={isModalOpen} 
+      // onClose={() => {
+      //   setIsModalOpen(false);
+      //   navigate("/")
+      // }}/>
+      <Modal/>
+    )    
+  } 
+  
 
   // Render the protected route's children if authenticated
-  return children;
+  return children ;
 };
 
 export default ProtectedRoute;

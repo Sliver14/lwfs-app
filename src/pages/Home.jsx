@@ -1,14 +1,10 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import  ImageSlider from "./ImageSlider";
 import  LogoSlider from "./LogoSlider";
 import Modal from "../component/Modal"
 import VideoSlider from "./VideoSlider";
-
-
-
 
 function Home() {
   const navigate = useNavigate();
@@ -24,29 +20,35 @@ function Home() {
       , title: "video1" },
   ];
 
+  const testimonySlides = [
+    {url: "../images/2@2x.jpg"},
+    {url: "../images/4@2x.jpg"},
+    {url: "../images/5@2x.jpg"},
+  ]
+
   return (
-    <div className='flex flex-col w-screen text-base bg-white font-sans'>
+    <div className='flex flex-col w-screen text-base bg-white font-sans gap-5'>
 
        <div className='flex flex-col pt-12 pb-20 gap-5' >
 
       {/* <Modal/> */}
       
       <div className='flex flex-col relative w-screen'>
-        <div className='relative h-52 max-h-[600px] w-screen md:h-80'>
+        <div className='relative h-52 max-h-[600px] w-screen md:h-80 lg:h-96'>
           <img className='absolute object-cover object-[50%_20%] h-full w-full' src='../images/bg-bg.jpeg'/>
           <div className='absolute inset-0 bg-black opacity-65'></div>
         </div>
         
         <div className='absolute inset-0 flex items-center justify-start w-screen p-10'> 
-          <div className=' flex flex-col text-white text-2xl font-semibold md:text-4xl md:font-bold'>
-            <p className='text-lw_yellow text-xl md:text-2xl'>Loveworld</p>
-            <p className='font-bold md:font-extrabold'>Foundation School</p>
+          <div className=' flex flex-col text-white text-2xl font-semibold md:text-4xl md:font-bold first-letter:lg:font-extrabold lg:text-5xl'>
+            <p className='text-lw_yellow text-xl md:text-2xl lg:text-4xl'>Loveworld</p>
+            <p className='font-bold md:font-extrabold '>Foundation School</p>
           </div>
         </div>
         
       </div>
-
-      <div className='flex flex-col md:flex-row md:py-5'>
+      {/* Foundation School */}
+      <div className='flex flex-col  md:py-5 gap-5'>
         <div className='flex flex-col w-screen'>
           <div className='flex flex-col gap-2 px-5 text-wrap md:px-10'>
             <p className='font-bold text-2xl text-lw_blue'>Welcome to Loveworld</p>
@@ -63,8 +65,8 @@ function Home() {
         </div>
 
         {/* Up coming programmes */}
-        <div className="relative flex flex-col justify-center items-center w-screen md:p-10">
-          <div className=" relative w-screen h-56 shadow-lg md:w-[100%] md:h-[350px]">
+        <div className="relative flex flex-col justify-center items-center w-screen md:px-10">
+          <div className=" relative w-screen h-[350px] shadow-lg max-h-[550px]">
             <ImageSlider slides={slides} autoScroll={true} interval={20000} />
           </div>
           <div className='hidden md:flex flex-col px-2 gap-5 py-8'>
@@ -76,14 +78,14 @@ function Home() {
  
 
       {/* platforms */}
-      <div className='flex flex-col gap-5 md:flex-row w-screen md:gap-2 md:p-5'>
-          <div className='flex flex-col bg-lw_dark_blue text-white gap-5 px-8 py-12 text-wrap md:flex-1'>
+      <div className='flex flex-col gap-5 md:flex-row w-screen md:gap-5 md:p-5'>
+          <div className='flex flex-col bg-lw_dark_blue text-white gap-5 px-8 py-12 text-wrap hover:shadow-md translate transform ease-out duration-150 md:hover:scale-105 md:flex-1'>
             <h1 className='text-3xl font-bold md:text-wrap'>Online Class</h1>
             <p>The Loveworld Foundation School is a Christian education platform by Pastor Lanre Alabi, offering courses to strengthen faith and spiritual growth. It equips believers with foundational biblical teachings and practical insights for victorious living.</p>
-            <a href='https://online.lwfoundationschool.org/' target="blank" className='px-5 py-2 rounded-md bg-lw_yellow w-32 text-center text-black hover:bg-opacity-0 hover:border-2 hover:border-solid hover:border-white hover:text-white transform duration-300 '>Apply Now</a>
+            <a href='https://online.lwfoundationschool.org/' target="blank" className='px-5 py-2 rounded-md bg-lw_yellow w-32 text-center text-black hover:bg-opacity-0 hover:border-2 hover:border-solid hover:border-white  hover:text-white transform duration-300 '>Apply Now</a>
           </div>
 
-          <div className='flex flex-col bg-lw_dark_blue text-white gap-5 px-8 py-12 text-wrap md:flex-1'>
+          <div className='flex flex-col bg-lw_dark_blue text-white gap-5 px-8 py-12 text-wrap hover:shadow-md translate transform ease-out duration-150 md:hover:scale-105 md:flex-1'>
             <h1 className='text-3xl font-bold'>Testimony Bank</h1>
             <p>The Loveworld Foundation School Testimony Bank is a platform where students share testimonies of life transformation and spiritual growth through the teachings of Pastor Chris Oyakhilome.</p>
             <a href='https://lwfoundationschool.org/testimonybank/' target="_blank" className='px-5 py-2 rounded-md bg-lw_yellow w-56 text-center text-black hover:bg-opacity-0 hover:border-2 hover:border-solid hover:border-white hover:text-white transform duration-300'>Share Your Testimony</a>
@@ -110,12 +112,17 @@ function Home() {
       </div>
 
       {/* Testimony slider*/}
-      <div className='flex flex-col w-screen h-[450px] relative group' >
-        <img src='../images/partnership.jpg' className='absolute object-cover flex w-full h-full'/>
-        <a href='https://lwfoundationschool.org/testimonybank/' target="_blank" className='flex flex-col absolute text-xl inset-0 bg-lw_yellow w-full text-black h-12 bottom-8 self-end justify-center items-center text-center opacity-0 group-hover:opacity-90 transform duration-500'>
-          <p>Share Your Testimony</p>
-        </a>
-      </div>
+      <div className='flex relative gap-2 w-screen overflow-x-scroll'>
+        {testimonySlides.map((testimony)=>(
+          <div className='flex relative group h-[350px] w-[350px]'>
+            <img src={testimony.url} className=' object-contain w-full h-full'/>
+            <a href='https://lwfoundationschool.org/testimonybank/' target="_blank" className='flex flex-col absolute text-xl inset-0 bg-lw_yellow w-full text-black h-12 bottom-8 self-end justify-center items-center text-center opacity-0 group-hover:opacity-90 transform duration-500'>
+              <p>Share Your Testimony</p>
+            </a>
+          </div>
+        ))}
+        </div>
+        
 
       {/* Resource center video slider */}
       <div className="w-screen ">

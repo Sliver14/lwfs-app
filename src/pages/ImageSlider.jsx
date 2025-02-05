@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSwipeable } from "react-swipeable";
 
-function ImageSlider({ slides, autoScroll = true, interval = 20000 }) {
+function ImageSlider({ slides, autoScroll, interval }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Auto-scroll functionality
@@ -51,7 +51,7 @@ function ImageSlider({ slides, autoScroll = true, interval = 20000 }) {
         className="block w-full h-full"
       >
           <div
-            className="absolute w-full h-full bg-cover bg-[20%_25%] transition-all duration-1000 object-cover"
+            className="absolute w-full h-full bg-contain object-contain bg-no-repeat transition-all duration-1000 "
             style={{ backgroundImage: `url(${slides[currentIndex]?.url})` }}
           ></div>
       

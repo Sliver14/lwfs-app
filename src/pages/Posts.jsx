@@ -6,8 +6,8 @@ import axios from "axios";
 
 function Posts() {
   const [listOfPosts, setListOfPosts] = useState([]);
-  const apiUrl = "https://lwfs-app-server-production.up.railway.app";
-  // const apiUrl = "http://localhost:3001";
+  // const apiUrl = "https://lwfs-app-server-production.up.railway.app";
+  const apiUrl = "http://localhost:3001";
 
   useEffect(() => {
     
@@ -32,8 +32,8 @@ function Posts() {
 
         
           {listOfPosts.map((post) => ( 
-          <>
-            <div key={post.id} className='flex flex-col pl-3 m-1 border-2 rounded-md border-gray-100  hover:border-[0.5px] hover:border-lw_blue hover:rounded-lg'>
+          <div key={post.id} >
+            <div className='flex flex-col pl-3 m-1 border-2 rounded-md border-gray-100  hover:border-[0.5px] hover:border-lw_blue hover:rounded-lg'>
               <div className='flex flex-col h-auto w-[98%] mt-3' >
               <img className='flex h-full w-full rounded-lg ' src={post.postPhoto}  alt=''/>
             </div>
@@ -49,7 +49,7 @@ function Posts() {
             </div>
             <button className='flex items-center w-40 gap-1 border-2 border-slate-200 text-lwfs4 px-5 py-2 my-2 hover:font-bold hover:shadow-sm hover:bg-lwfs2 hover:text-lwfs3 hover:border-0 hover:shadow-black rounded-md'>Read More <IoChevronForwardOutline className='text-xl'/></button>
             </div>
-          </>
+          </div>
             
           ))}
           

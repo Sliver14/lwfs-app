@@ -17,6 +17,7 @@ import PostPage from './pages/PostPage';
 import ProtectedRoute from './utils/ProtectedRoute';
 import Modal from './component/Modal';
 import process from 'process';
+import AdminDashboard from './pages/AdminDashboard';
 
 
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/footer" element={<Footer />} />
         <Route path="/postpage" element={<PostPage/>}/>
         <Route path="/logoslider" element={<LogoSlider/>}/>
+        <Route path="/admindashboard" element={<AdminDashboard/>}/>
         <Route path="/modal" element={<Modal/>}/>
         {/* <Route path="/verifycode" element={<VerifyCode />} /> */}
         <Route path="*" element={<PageNotFound />} />

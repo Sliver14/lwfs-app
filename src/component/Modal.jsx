@@ -3,27 +3,30 @@ import { useState, useEffect } from 'react';
 import { IoCloseSharp } from "react-icons/io5";
 import Cookies from "js-cookie";
 import countryCodes from "../utils/countryCodes.js";
+import country from '../utils/country.js';
 import zones from "../utils/zones.js";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useNavigate, Link, NavLink } from 'react-router-dom';
+import { useLocation, useNavigate, Link, NavLink } from 'react-router-dom';
 import process from 'process';
 
 
 function Modal () {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const location = useLocation();
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(false); // Loading state
   const [code, setCode] = useState("");
-  const [step, setStep] = useState(1);
-      const apiUrl = "http://localhost:3001";
-      // const apiUrl = "https://lwfs-app-server-production.up.railway.app";
-      
+  const [step, setStep] = useState("signin");
+  // const apiUrl = "http://localhost:3001";
+  const apiUrl = "https://lwfs-app-server-production.up.railway.app";
+  const previousPage = location.state?.from || "/";
+  // if (!isOpen) return null;
   
   const initialValues = {
     // title: "",
@@ -32,6 +35,7 @@ function Modal () {
     countryCode: "+234", // Match the code in countryCodes
     phoneNumber: "",
     zone: "",
+    country: "Nigeria",
     church: "",
     // dateOfbirth: "",
     email: "",
@@ -57,6 +61,8 @@ function Modal () {
     church: Yup.string().required(""),
 
     email: Yup.string().email("Invalid email address").required("Email is required"),
+
+    country: Yup.string().required(""),
     
   });
 
@@ -66,28 +72,6 @@ const handleSubmit = async (e) => {
   setLoading(true);
   try {
     const response = await axios.post(`${apiUrl}/auth/signin`, { email });
-    setSuccess(response.data.message);
-    // setLoggedIn(true); // Set loggedIn to true
-    setStep(2);
-    // setIsModalOpen(false);
-    setError(null); // Clear error
-  } catch (error) {
-    console.error("Sign-in error:", error);
-    setError(error.response?.data?.error || "Sign-in failed");
-    // setLoggedIn(false); // Set loggedIn to false on error
-  }finally {
-    setLoading(false); // Stop loading
-  }
-};
-
-// Signin verification
-const signinVerification = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-  
-  try{
-    const response = await axios.post(`${apiUrl}/auth/verify-signin`, { email, code });
-
     const { token } = response.data;
 
     // Save token to cookies
@@ -95,26 +79,39 @@ const signinVerification = async (e) => {
 
     setSuccess(response.data.message);
     setIsModalOpen(false);
-    // setLoggedIn(true);
+    setError("");
+    setLoggedIn(true);
     window.location.reload();
-  } catch (error){
-    setError(error.response?.data?.error || "Verification failed");
-  } finally {
-    setLoading(false);
+  } catch (error) {
+    console.error("Sign-in error:", error);
+    if (error.response?.data?.error.includes('user not verified')){
+      const response2 = await axios.post(`${apiUrl}/auth/resend-code`, {email});
+      setStep("verify");
+    }
+    setError(error.response?.data?.error || "Sign-in failed");
+    // setLoggedIn(false); // Set loggedIn to false on error
+  }finally {
+    setLoading(false); // Stop loading
   }
-}
+};
 
 //handle signup
 const onSubmit = async (data) => {
-  setError("");
-  setSuccess("");
+  setLoading(true);
 try {
   const response = await axios.post(`${apiUrl}/auth/signup`, data);
-  setStep(4);
+  setStep("verify");
   setSuccess(response.data.message);
+  
 } catch(error){
   console.error("Already Registered", error);
+  if (error.response?.data?.error.includes('User not verified')){
+    const response2 = await axios.post(`${apiUrl}/auth/resend-code`, {email});
+    setStep("verify");
+  }
   setError(error.response?.data?.error || "Error verifiying code");
+}finally{
+  setLoading(false);
 }
 }
 
@@ -132,7 +129,8 @@ const signupVerification = async (e) => {
     // Cookies.set("authToken", token, { expires: 30, secure: process.env.NODE_ENV === "production" , sameSite: "strict" });
 
     setSuccess(response.data.message);
-    setStep(1);
+    setStep("signin");
+    setError("");
     // setIsModalOpen(false);
     // // setLoggedIn(true);
     // window.location.reload();
@@ -144,6 +142,7 @@ const signupVerification = async (e) => {
   }
 }
 
+
 useEffect(()=>{
   const fetchUserDetails = async () => {
     try {
@@ -154,6 +153,8 @@ useEffect(()=>{
       setIsModalOpen(false);
       navigate("/");    
     } catch (error) {
+      setLoggedIn(false);  
+      setIsModalOpen(true);
       console.error('Verification failed:', error.message);
     } finally {
       setLoading(false);
@@ -163,67 +164,61 @@ useEffect(()=>{
   fetchUserDetails();
 },[])
 
+useEffect(() => {
+  return () => {
+    setError(null);
+    setSuccess(null);
+  };
+},[])
+
+// const openModal = () => {
+//   setIsModalOpen(true);
+// }
 
 const closeModal = () => {
   setIsModalOpen(false);
-  navigate("/");
+  navigate(previousPage);
 }
 
   return (
     <div>
            {/* Modal */}
-           {isModalOpen && (
-        <div className="flex flex-col fixed top-0 left-0 rigth-0 bottom-0 w-screen h-screen bg-lw_gray justify-center items-center bg-opacity-80 z-50 transition duration-300 ">
+      {isModalOpen && 
+        <div className="flex flex-col fixed top-0 left-0 rigth-0 bottom-0 w-screen h-screen bg-lw_gray justify-center items-center bg-opacity-80 z-50 ">
           
-          <div className="relative flex w-11/12 h-5/6 transition duration-300 justify-center items-center bg-white rounded-lg overflow-y-auto">
+          <div className="relative flex w-[95%] h-[90%] max-w-[650px] justify-center shadow-md items-center bg-white rounded-lg overflow-y-auto">
             
-          <div className='flex flex-col  justify-center items-center text-center w-[100%] h-[100%]  ' >
-          <button onClick={closeModal}><IoCloseSharp className='absolute font-bold text-2xl top-5 right-5' /></button>
-          
-            {step === 1 && <>
-                <div className='flex justify-center w-full items-center mb-10 transition duration-300' >
-                  <h2 className='text-4xl font-bold ' >Sign In</h2>
+          <div className='flex relative flex-col items-center text-center w-full h-full' >
+          <button onClick={closeModal} ><IoCloseSharp className='absolute font-bold text-2xl top-5 right-5'/></button>
+             
+              {/* Signin */}
+            {step === 'signin' && 
+              <div className='flex flex-col my-auto  gap-5'>
+                <div className='flex justify-center items-center' >
+                  <h2 className='text-3xl font-bold ' >Sign In</h2>
                 </div>
-               {/* Login */}
+               
               <div className='flex flex-col items-center' >
-                <input onChange={(event) => setEmail(event.target.value)} className='border border-lwfs3 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-lwfs2 text-2xl' type="text" placeholder='Email'/>
+                <input onChange={(event) => setEmail(event.target.value)} className='border rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-black text-lg w-[250px]' type="email" autoComplete="email" placeholder='Email'/>
                 <button onClick={handleSubmit} 
-                className={`bg-lw_blue w-32 mt-5 rounded-md text-white p-2 mb-5 ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 text-white"}`} 
+                className={`bg-lw_blue mt-5 w-[250px] transition transform ease-out duration-200 hover:scale-95 hover:shadow-sm rounded-md text-white p-2 mb-5 ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 text-white"}`} 
                 disabled={loading} >{loading ? "Signing In..." : "Sign In"}</button>
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 {success && <p style={{ color: "green" }}>{success}</p>}
-                <span onClick={()=>{setStep(3)}}>New here? <a className='text-lwfs2 cursor-pointer' >Create Account</a></span>
+                <span onClick={()=>{setStep("signup")}}>New here? <a className="text-blue-500 hover:underline cursor-pointer" >Create Account</a></span>
               </div>
-              </> 
+              </div> 
             }
 
-            { step === 2 && 
-              <>
-                <h2>{email}</h2>
-                <h2>Enter Verification Code</h2>
-                <input
-                  type="text"
-                  onChange={(e) => setCode(e.target.value)}
-                />
-                <button onClick={signinVerification} className={`bg-lw_blue w-32 mt-5 rounded-md text-white p-2 mb-5 ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-blue-500 text-white"}`} 
-                disabled={loading}>{loading ? "Verifying..." : "Verify Code"}</button>
-                {error && <p style={{ color: "red" }}>{error}</p>}
-                {success && <p style={{ color: "green" }}>{success}</p>}
-                <button onClick={handleSubmit}>Re-send code</button>
-                <buttton onClick={() => {setStep(1)}}>Signin</buttton>
-                <buttton onClick={() => {setStep(3)}}>Signup</buttton>
-              </>
-            }
-
-             { step === 3 &&
-                <>
-                  <div className='flex justify-center w-full items-center mb-10 ' >
+             { step === 'signup' &&
+                <div className='flex flex-col absolute top-10'>
+                  <div className='flex flex-col justify-center items-center' >
                   <h2 className='text-2xl font-bold ' >Create Account</h2>
               </div>
-              <div>
+              <div className='pb-10'>
               <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
               {({ values, handleChange, setFieldValue }) => (
-                <Form className="max-w-md mx-auto bg-white shadow-md rounded-lg p-6 space-y-4">
+                <Form className="max-w-md mx-auto bg-white  rounded-lg p-6 space-y-4">
                   {/* First Name */}
                   <div className="flex flex-col">
                     <label htmlFor="firstName" className="text-gray-700 font-medium mb-1">
@@ -232,7 +227,7 @@ const closeModal = () => {
                     <Field
                       id="firstName"
                       name="firstName"
-                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-black"
                     />
                     <ErrorMessage name="firstName" component="span" className="text-red-500 text-sm mt-1" />
                   </div>
@@ -245,28 +240,28 @@ const closeModal = () => {
                     <Field
                       id="lastName"
                       name="lastName"
-                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-black"
                     />
                     <ErrorMessage name="lastName" component="span" className="text-red-500 text-sm mt-1" />
                   </div>
 
-                  {/* Country Code */}
+                  {/* Country */}
                   <div className="flex flex-col">
-                    <label htmlFor="countryCode" className="text-gray-700 font-medium mb-1">
-                      Country Code
+                    <label htmlFor="country" className="text-gray-700 font-medium mb-1">
+                      Country
                     </label>
                     <Field
                       as="select"
-                      name="countryCode"
-                      id="countryCode"
-                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      name="country"
+                      id="country"
+                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-black"
                     >
                       <option value="" disabled>
-                        Select your country code
+                        Select your country
                       </option>
-                      {countryCodes.map((country) => (
-                        <option key={country.name} value={country.code}>
-                          {country.name} ({country.code})
+                      {country.map((country, index) => (
+                        <option key={index} value={country}> 
+                          {country}
                         </option>
                       ))}
                     </Field>
@@ -281,7 +276,7 @@ const closeModal = () => {
                     <Field
                       id="phoneNumber"
                       name="phoneNumber"
-                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-black"
                     />
                     <ErrorMessage name="phoneNumber" component="span" className="text-red-500 text-sm mt-1" />
                   </div>
@@ -295,7 +290,7 @@ const closeModal = () => {
                       as="select"
                       name="zone"
                       id="zone"
-                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-black"
                     >
                       <option value="" disabled>
                         Select your zone
@@ -317,7 +312,7 @@ const closeModal = () => {
                     <Field
                       id="church"
                       name="church"
-                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-black"
                     />
                     <ErrorMessage name="church" component="span" className="text-red-500 text-sm mt-1" />
                   </div>
@@ -339,7 +334,7 @@ const closeModal = () => {
                         setFieldValue("email", e.target.value); // Update Formik state
                       }}
                       
-                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-black"
                     />
                     <ErrorMessage name="email" component="span" className="text-red-500 text-sm mt-1" />
                   </div>
@@ -351,43 +346,50 @@ const closeModal = () => {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-md p-2 mt-4 w-full"
+                    className="bg-lw_blue text-white font-medium rounded-md p-2 mt-4 w-full transition transform ease-out duration-200 hover:scale-95 hover:shadow-sm"
+                    disabled={loading}
                   >
-                    Register
+                    {loading ? "Registering..." : "Register" }
                   </button>
                 </Form>
               )}
               </Formik>
 
               {/* Already Registered */}
-              <span className="block text-center mt-2 text-sm">
+              <span className="block text-center mt-2 text-md">
                     Already registered?{" "}
                     <a
-                      onClick={() => setStep(1)}
-                      className="text-blue-500 hover:underline cursor-pointer"
+                      onClick={() => setStep("signin")}
+                      className="text-blue-600 hover:underline cursor-pointer"
                     >
                       Login
                     </a>
                   </span>
 
               </div>
-                </>
+                </div>
               }
 
-              { step === 4 && 
+              { step === 'verify' && 
               <>
-                <h2>{email}</h2>
-                <h2>Enter Verification Code</h2>
+                <div className='flex flex-col justify-center items-center mb-10 gap-5' >
+                  <h2 className='text-3xl font-bold ' >Check your inbox</h2>
+                
+                <h2>Enter the verification code sent to {email}</h2>
                 <input
+                  className='border border-lwfs3 rounded-md p-2 focus:outline-none focus:ring-1 focus:ring-black text-md w-[300px]'
                   type="text"
                   onChange={(e) => setCode(e.target.value)}
                 />
-                <button onClick={signupVerification}>Verify Code</button>
+                <button className={`flex  bg-lw_dark_blue text-white py-2 px-5 flex-grow rounded-sm justify-center w-[300px] transition transform ease-out duration-200 hover:scale-95 hover:shadow-sm ${loading ? "bg-gray-400 cursor-not-allowed" : "bg-black text-white"}`} disabled={loading} onClick={signupVerification}>{loading ? "Loading..." : "Continue"}</button>
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 {success && <p style={{ color: "green" }}>{success}</p>}
-                <button>Re-send code</button>
-                <buttton onClick={() => setStep(1)}>Signin</buttton>
-                <buttton onClick={() => setStep(3)}>Signup</buttton>
+                <button className='underline' onClick={() => setStep("resend-code")}>Resend-code</button>
+                <div className='flex gap-5 text-lg'>
+                  <buttton className='cursor-pointer' onClick={() => setStep("signin")}>Signin</buttton>
+                  <buttton className='cursor-pointer' onClick={() => setStep("signup")}>Signup</buttton>
+                </div>
+                </div>
               </>
               }
             
@@ -395,7 +397,8 @@ const closeModal = () => {
           </div>
           </div>
         </div>
-      )}
+      }
+      
     </div>
   )
 }
