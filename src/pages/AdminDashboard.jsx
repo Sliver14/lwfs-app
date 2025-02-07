@@ -38,7 +38,7 @@ function AdminDashboard() {
       <h1>Individual Participation: {adminReport.individualParticipation}</h1>
       <h1>Group Participation: {adminReport.groupParticipation}</h1>
       <h1>Number of Centers: {adminReport.numberOfCenters}</h1>
-      <h1>Number of Countries : </h1>
+      <h1>Number of Countries : {adminReport.numberOfCountries} </h1>
       <h1>Zonal Attendance</h1>
 
       {zonalReport.map((report, index)=>(

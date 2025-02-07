@@ -27,7 +27,7 @@ function Home() {
   ]
 
   return (
-    <div className='flex flex-col w-screen text-base bg-white font-sans gap-5'>
+    <div className='flex flex-col w-screen text-sm bg-white font-sans gap-5'>
 
        <div className='flex flex-col pt-12 pb-20 gap-5' >
 
@@ -48,12 +48,12 @@ function Home() {
         
       </div>
       {/* Foundation School */}
-      <div className='flex flex-col  md:py-5 gap-5'>
+      {/* <div className='flex flex-col  md:py-5 gap-5'> */}
         <div className='flex flex-col w-screen'>
           <div className='flex flex-col gap-2 px-5 text-wrap md:px-10'>
-            <p className='font-bold text-2xl text-lw_blue'>Welcome to Loveworld</p>
-            <p className='font-semibold text-xl text-lw_yellow'>Foundation School</p>
-            <p className='font-medium text-lg text-lw_blue'>The Foundation School is a compulsory part of our Church Ministry, with clearly defined Aims and Objectives as summarized below.</p>
+            <p className='font-bold text-xl text-lw_blue'>Welcome to Loveworld</p>
+            <p className='font-semibold text-lg text-lw_yellow'>Foundation School</p>
+            <p className='font-medium text-base text-lw_blue'>The Foundation School is a compulsory part of our Church Ministry, with clearly defined Aims and Objectives as summarized below.</p>
                 <p>1.  To preserve every eligible first timer or new convert in your Church, and successfully transit a soul saved into a soul won.</p>
                 <p>2.  To introduce the new converts and new members in your Church to the Foundational Doctrines of our Christianity and the Principles and Structures of our Ministry</p>
                 <p>3.  To help them understand our Vision and Mission, and see their definite role in them.</p>
@@ -66,7 +66,7 @@ function Home() {
 
         {/* Up coming programmes */}
         <div className="relative flex flex-col justify-center items-center w-screen md:px-10">
-          <div className=" relative w-screen h-[350px] shadow-lg max-h-[550px]">
+          <div className="w-screen h-[250px] shadow-lg md:h-[450px] lg:h-[650px]">
             <ImageSlider slides={slides} autoScroll={true} interval={20000} />
           </div>
           <div className='hidden md:flex flex-col px-2 gap-5 py-8'>
@@ -74,7 +74,7 @@ function Home() {
             {/* <h1 className='text-wrap' >March 2025, a time for divine encounter</h1>  */}
           </div> 
         </div>
-      </div>
+      {/* </div> */}
  
 
       {/* platforms */}
@@ -112,10 +112,10 @@ function Home() {
       </div>
 
       {/* Testimony slider*/}
-      <div className='flex relative gap-2 w-screen overflow-x-scroll'>
+      <div className='flex flex-col relative gap-5 w-screen overflow-x-scroll items-center justify-center md:flex md:flex-row'>
         {testimonySlides.map((testimony)=>(
-          <div className='flex relative group h-[350px] w-[350px]'>
-            <img src={testimony.url} className=' object-contain w-full h-full'/>
+          <div key={testimony.url} className='flex relative group h-auto w-full'>
+            <img src={testimony.url} className='w-full h-full object-cover'/>
             <a href='https://lwfoundationschool.org/testimonybank/' target="_blank" className='flex flex-col absolute text-xl inset-0 bg-lw_yellow w-full text-black h-12 bottom-8 self-end justify-center items-center text-center opacity-0 group-hover:opacity-90 transform duration-500'>
               <p>Share Your Testimony</p>
             </a>

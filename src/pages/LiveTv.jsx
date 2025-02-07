@@ -6,14 +6,17 @@ import Hls from "hls.js";
 import HlsPlayer from "../component/HlsPlayer"
 // import AdminDashboard from './AdminDashboard';
 // import io from 'socket.io-client';
+import { io } from "socket.io-client";
+
+const socket = io("http://localhost:3001", {transport: ["websocket", "polling"] }); // Connect to backend
 
 
 function LiveTv() {
   
   const [content, setContent] = useState('');
   const [onCommentPosted, setOnCommentPosted] = useState("");
-  // const apiUrl = 'http://localhost:3001';
-  const apiUrl = "https://lwfs-app-server-production.up.railway.app";
+  const apiUrl = 'http://localhost:3001';
+  // const apiUrl = "https://lwfs-app-server-production.up.railway.app";
   const [comments, setComments] = useState([]);
   const scrollRef = useRef(null);
   const videoRef = useRef(null);
@@ -80,11 +83,11 @@ function LiveTv() {
         withCredentials: true, // Include user token from cookies
       });
 
-      setOnCommentPosted(response.data); // Update the comment list
+      // setOnCommentPosted(response.data); // Update the comment list
 
-      const handleNewComment = (newComment) => {
-        setComments((onCommentPosted) => [newComment, ...onCommentPosted]); // Add the new comment to the list
-      };
+      // const handleNewComment = (newComment) => {
+      //   setComments((onCommentPosted) => [newComment, ...onCommentPosted]); // Add the new comment to the list
+      // };
 
       setContent(''); // Clear the input
     } catch (error) {
@@ -100,13 +103,22 @@ function LiveTv() {
           withCredentials: true, // Ensure cookies are sent
         });
         setComments(response.data);
-        console.log(comments.content)
+        console.log(response.data);
       } catch (error) {
         console.error('Error fetching comments:', error);
       }
     };
 
     fetchComments();
+
+    // Listen for new comments from the server
+    socket.on("commentUpdated", (newComment) => {
+      setComments((prevComments) => [newComment, ...prevComments]);
+  });
+
+  // Cleanup listener when component unmounts
+  return () => socket.off("commentUpdated");
+
   }, []);
 
 // update groupAttendance
@@ -177,11 +189,12 @@ const updateAttendance = async () => {
             <button className='bg-lw_yellow px-8 py-2 md:px-5'>Programme Line-UP</button>
           </div>
           
-          <div ref={scrollRef} className='flex flex-col bg-white p-3 border-[1.5px] border-solid border-lw_gray w-screen overflow-y-auto h-auto md:w-full md:h-auto'>
-            
+          <div className='flex flex-col bg-white p-3 border-[1.5px] border-solid border-lw_gray w-screen '>
+
+          <div ref={scrollRef} className='flex flex-col overflow-y-auto h-[250px] md:w-full md:h-[350px]'>
           {comments.slice() // Create a copy to avoid mutating the original array
           .reverse().map((comment) => (
-              <div key={comment.id} className='flex flex-col px-2 py-1 mb-5 border-2 border-solid border-gray-300 rounded-md'>
+              <div key={comment.id} className='flex flex-col px-2 py-1 mb-5 border-2 border-solid border-gray-300 rounded-md '>
                 <p className='text-xs'>{comment.content}</p>
                 <div className='flex gap-5'>
                 <p className='text-xs text-gray-500 italic'>{comment.user?.firstName}</p> 
@@ -189,6 +202,7 @@ const updateAttendance = async () => {
                 </div>
               </div>
           ))}
+          </div>
             
             <div className='flex flex-col gap-2'>
               <textarea value={content} onChange={(event)=>{setContent(event.target.value)}} className='p-2 grow rounded-md border-[1.5px] border-solid border-black min-h-20' type='text' placeholder='Type your comment here'/>

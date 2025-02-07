@@ -23,8 +23,8 @@ function Modal () {
   const [loading, setLoading] = useState(false); // Loading state
   const [code, setCode] = useState("");
   const [step, setStep] = useState("signin");
-  // const apiUrl = "http://localhost:3001";
-  const apiUrl = "https://lwfs-app-server-production.up.railway.app";
+  const apiUrl = "http://localhost:3001";
+  // const apiUrl = "https://lwfs-app-server-production.up.railway.app";
   const previousPage = location.state?.from || "/";
   // if (!isOpen) return null;
   

@@ -12,8 +12,8 @@ function PostPage() {
 
     const handlePost = async (e) => {
       e.preventDefault();
-      const apiUrl = "https://lwfs-app-server-production.up.railway.app";
-      // const apiUrl = "http://localhost:3001";
+      // const apiUrl = "https://lwfs-app-server-production.up.railway.app";
+      const apiUrl = "http://localhost:3001";
 
       if (!postPhoto) {
         alert("Please select a file to upload");
