@@ -7,7 +7,7 @@ import axios from "axios";
 function Posts() {
   const [listOfPosts, setListOfPosts] = useState([]);
   // const apiUrl = "https://lwfs-app-server-production.up.railway.app";
-  const apiUrl = "http://localhost:3001";
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     

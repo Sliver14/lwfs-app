@@ -4,7 +4,7 @@ import axios from 'axios';
 function AdminDashboard() {
     const [adminReport, setAdminReport ] = useState([]);
     const [zonalReport, setZonalReport ] = useState([]);    
-    const apiUrl = "http://localhost:3001";
+    const apiUrl = import.meta.env.VITE_API_URL;
 
     useEffect(() => {
         const dashboardStats = async () => {

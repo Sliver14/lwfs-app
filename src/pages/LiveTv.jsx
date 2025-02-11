@@ -15,8 +15,7 @@ function LiveTv() {
   
   const [content, setContent] = useState('');
   const [onCommentPosted, setOnCommentPosted] = useState("");
-  const apiUrl = 'http://localhost:3001';
-  // const apiUrl = "https://lwfs-app-server-production.up.railway.app";
+  const apiUrl = import.meta.env.VITE_API_URL;
   const [comments, setComments] = useState([]);
   const scrollRef = useRef(null);
   const videoRef = useRef(null);

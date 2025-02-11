@@ -23,7 +23,7 @@ function Navbar() {
     const inactiveClass = "flex text-black px-3 py-2 rounded-lg hover:bg-gray-300 hover:bg-opacity-25 hover:text-black transform transform ease-out duration-300 hover:scale-95";
     const [user, setUser] = useState("");
     const [groupParticipation, setGroupParticipation] = useState("");
-    const apiUrl = 'http://localhost:3001';
+    const apiUrl = import.meta.env.VITE_API_URL;
     // const apiUrl = "https://lwfs-app-server-production.up.railway.app";
     const [loading, setLoading] = useState(true);
     const navRef = useRef(null);
