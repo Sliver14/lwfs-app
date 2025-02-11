@@ -24,7 +24,6 @@ function Navbar() {
     const [user, setUser] = useState("");
     const [groupParticipation, setGroupParticipation] = useState("");
     const apiUrl = import.meta.env.VITE_API_URL;
-    // const apiUrl = "https://lwfs-app-server-production.up.railway.app";
     const [loading, setLoading] = useState(true);
     const navRef = useRef(null);
     const nav2Ref = useRef(null);
@@ -254,8 +253,8 @@ function Navbar() {
     {/* Mobile Toggle */}
     <div className='flex flex-row w-full align-middle justify-between p-5 pr-10 items-center' >
       <div className='flex gap-2 text-xs'>
-        <div className='flex flex-col bg-gray-900 text-xl font-bold rounded-full text-white self-center  w-12 h-12 items-center justify-center '>{user?.lastName ? user.lastName.charAt(0) : ''} {user?.firstName ? user.firstName.charAt(0) : ''}</div> 
-        <h1 className='cursor-pointer text-sm flex items-center gap-1' onClick={profileToggle}>{user.firstName} {user.lastName}</h1> 
+        <div className='flex flex-col bg-gray-900 text-xl font-bold rounded-full text-white self-center  w-12 h-12 items-center justify-center '>{user?.lastName ? user.lastName.charAt(0) : ''} {user?.firstName ? user?.firstName.charAt(0) : ''}</div> 
+        <h1 className='cursor-pointer text-sm flex items-center gap-1' onClick={profileToggle}>{user?.firstName} {user?.lastName}</h1> 
       </div>   
       <button onClick={toggleSidebar} className="ml-3 p-5" ><IoMdClose />
       </button>

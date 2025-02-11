@@ -102,7 +102,7 @@ function LiveTv() {
           withCredentials: true, // Ensure cookies are sent
         });
         setComments(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error('Error fetching comments:', error);
       }
@@ -111,12 +111,12 @@ function LiveTv() {
     fetchComments();
 
     // Listen for new comments from the server
-    socket.on("commentUpdated", (newComment) => {
-      setComments((prevComments) => [newComment, ...prevComments]);
-  });
+  //   socket.on("commentUpdated", (newComment) => {
+  //     setComments((prevComments) => [newComment, ...prevComments]);
+  // });
 
   // Cleanup listener when component unmounts
-  return () => socket.off("commentUpdated");
+  // return () => socket.off("commentUpdated");
 
   }, []);
 
