@@ -227,7 +227,7 @@ function Navbar() {
         {!loggedIn ? <div className='hidden lg:flex items-center space-x-5 mr-10'>
           <h1 onClick={()=> navigate("/modal")} className='cursor-pointer'>Login/Register</h1>
         </div> : <div className='flex items-center'>
-          <h1 className='cursor-pointer text-sm flex items-center gap-1' onClick={profileToggle}>{user.firstName} {user.lastName}<FaAngleDown/></h1>
+          <h1 className='cursor-pointer text-sm flex items-center gap-1' onClick={profileToggle}>{user?.firstName} {user?.lastName}<FaAngleDown/></h1>
           
           {profile && <>
             <div className='absolute top-[60px] right-5 flex items-center shadow-md  text-red-600 bg-white p-5 z-20  transition translate duration-150'>
