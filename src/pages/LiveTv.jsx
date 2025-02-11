@@ -8,7 +8,7 @@ import HlsPlayer from "../component/HlsPlayer"
 // import io from 'socket.io-client';
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:3001", {transport: ["websocket", "polling"] }); // Connect to backend
+// const socket = io("http://localhost:3001", {transport: ["websocket", "polling"] }); // Connect to backend
 
 
 function LiveTv() {

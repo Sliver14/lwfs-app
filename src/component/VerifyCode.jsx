@@ -10,6 +10,7 @@ function VerifyCode() {
     const signin = async (e) => {
         e.preventDefault();
 
+
         try{
             const response = await axios.post(`${apiUrl}/auth/signin`, { email} );
             setStep(2)
